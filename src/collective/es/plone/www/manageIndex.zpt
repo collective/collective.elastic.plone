@@ -57,7 +57,7 @@
       </tr>
     </table>
   </form>
-  <script src="${context/portal_url}/++plone++static/components/ace-builds/src/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://pagecdn.io/lib/ace/1.4.5/ace.js" ></script>
   <script>
   var editdiv = document.querySelector('#editdiv');
   var editor = ace.edit(editdiv)
