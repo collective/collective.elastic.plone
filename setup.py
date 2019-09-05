@@ -46,9 +46,10 @@ setup(
     zip_safe=False,
     python_requires=">=3.6",
     install_requires=[
-        'setuptools',
-        'plone.restapi',
+        'elasticsearch',
         'jinja2',
+        'plone.restapi',
+        'setuptools',
     ],
     extras_require={
         'test': [
