@@ -1,4 +1,23 @@
 <?xml version="1.0"?>
-<object name="portal_catalog">
-  <!--<column value="my_meta_column"/>-->
+<object name="portal_catalog" meta_type="Plone Catalog Tool">
+  <index name="SearchableText" meta_type="ZCTextIndex" remove="true"></index>
+  <index name="SearchableText" meta_type="ElasticSearchProxyIndex">
+    <querytemplate>
+{
+    "query":{
+        "query_string":{
+            "query":"{{keys[0].decode('utf8').replace('"', '')}}",
+            "fields":[
+                "title^1.2",
+                "description^1.1",
+                "subjects^2",
+                "extracted_text",
+                "extracted_file",
+                "extracted_image"
+            ]
+        }
+    }
+}
+    </querytemplate>
+  </index>
 </object>
