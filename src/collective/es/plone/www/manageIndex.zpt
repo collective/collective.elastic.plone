@@ -1,0 +1,75 @@
+<tal:header replace="structure context/manage_page_header" />
+<tal:tabs replace="structure context/manage_tabs" />
+<main class="container-fluid">
+  <style>
+    #editdiv {
+    width: 800px;
+    height: 400px;
+  }
+  </style>
+  <p tal:content="python:request.form.get('message', '')"></p>
+  <form action="manage_ESPIndexExtras" method="post" enctype="multipart/form-data">
+    <table cellspacing="0" cellpadding="2" border="0">
+      <tr>
+        <td align="left" valign="top">
+          <div class="form-optional">
+            ID
+          </div>
+        </td>
+        <td align="left" valign="top">
+          ${context/getId}
+        </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top">
+          <div class="form-optional">
+            Count
+          </div>
+        </td>
+        <td align="left" valign="top">
+          ${context/numObjects}
+        </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top">
+          <div class="form-label">
+            ElasticSearch <br />
+            JSON-Query Template
+          </div>
+        </td>
+        <td align="left" valign="top">
+          <textarea id="editvalue"
+                    name="extra.query_template:record"
+                    tal:content="python:context.query_template">
+            template here
+          </textarea>
+          <div id="editdiv" />
+        </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top">
+        </td>
+        <td align="left" valign="top">
+          <div class="form-element">
+            <input class="form-element" type="submit" name="submit" value=" Update " />
+          </div>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <script src="${context/portal_url}/++plone++static/components/ace-builds/src/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+  var editdiv = document.querySelector('#editdiv');
+  var editor = ace.edit(editdiv)
+
+  editor.session.setMode("ace/mode/json");
+  editor.setTheme("ace/theme/monokai");
+  var textarea = document.querySelector('#editvalue');
+  textarea.style.display = 'none';
+  editor.getSession().setValue(textarea.value);
+  editor.getSession().on('change', function() {
+    textarea.value = editor.getSession().getValue();
+  });
+
+  </script>
+</main>

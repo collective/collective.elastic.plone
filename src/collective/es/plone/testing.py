@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
 from App.config import getConfiguration
 from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
-from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneSandboxLayer
-from plone.testing import z2
-
-import collective.es.plone
 
 
 class CollectiveEsPloneLayer(PloneSandboxLayer):
@@ -20,14 +16,13 @@ class CollectiveEsPloneLayer(PloneSandboxLayer):
         # The z3c.autoinclude feature is disabled in the Plone fixture base
         # layer.
         import plone.restapi
+        import collective.es.plone
 
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=collective.es.plone)
 
     def setUpPloneSite(self, portal):
-        getConfiguration().product_config = {
-            'addresses': 'localhost:9200',
-        }
+        getConfiguration().product_config = {"addresses": "localhost:9200"}
         applyProfile(portal, "collective.es.plone:default")
 
 
@@ -43,14 +38,4 @@ COLLECTIVE_ES_PLONE_INTEGRATION_TESTING = IntegrationTesting(
 COLLECTIVE_ES_PLONE_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(COLLECTIVE_ES_PLONE_FIXTURE,),
     name="CollectiveEsPloneLayer:FunctionalTesting",
-)
-
-
-COLLECTIVE_ES_PLONE_ACCEPTANCE_TESTING = FunctionalTesting(
-    bases=(
-        COLLECTIVE_ES_PLONE_FIXTURE,
-        REMOTE_LIBRARY_BUNDLE_FIXTURE,
-        z2.ZSERVER_FIXTURE,
-    ),
-    name="CollectiveEsPloneLayer:AcceptanceTesting",
 )
