@@ -5,6 +5,7 @@ from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneSandboxLayer
+from plone.testing import zope
 
 
 class CollectiveEsPloneLayer(PloneSandboxLayer):
@@ -20,6 +21,7 @@ class CollectiveEsPloneLayer(PloneSandboxLayer):
 
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=collective.es.plone)
+        zope.installProduct(app, 'collective.es.plone')
 
     def setUpPloneSite(self, portal):
         getConfiguration().product_config = {"addresses": "localhost:9200"}

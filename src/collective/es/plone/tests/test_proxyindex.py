@@ -23,7 +23,7 @@ TEST_TEMPLATE_FULLTEXT = """\
 {
     "query":{
         "query_string":{
-            "query":"{{keys[0].decode('utf8').replace('"', '')}}",
+            "query":"{{keys[0].replace('"', '')}}",
             "fields":[
                 "title^1.2",
                 "description^1.1",
