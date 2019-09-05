@@ -6,34 +6,11 @@
 collective.es.plone
 ===================
 
-Tell me what your product does
+ElasticSearch Integration for Plone content
 
-Features
---------
-
-- Can be bullet points
-
-
-Examples
---------
-
-This add-on can be seen in action at the following sites:
-- Is there a page on the internet where everybody can see the features?
-
-
-Documentation
--------------
-
-Full documentation for end users can be found in the "docs" folder, and is also available online at http://docs.plone.org/foo/bar
-
-
-Translations
-------------
-
-This product has been translated into
-
-- Klingon (thanks, K'Plai)
-
+- indexer passing content to an `collective.es.ingestion` service.
+- index acting as a proxy to ElasticSearch, integrates with ZCatalog
+- custom plugins for `plone.restapi` to provide strcutural information for the igestions service
 
 Installation
 ------------
@@ -45,25 +22,45 @@ Install collective.es.plone by adding it to your buildout::
     ...
 
     eggs =
+        ...
         collective.es.plone
+
+    zope-conf-additional =
+        ...
+        <product-config elasticsearch>
+            addresses localhost:9200
+            use-ssl false
+        <product-config>
 
 
 and then running ``bin/buildout``
 
 
-Contribute
-----------
+Source Code
+-----------
 
-- Issue Tracker: https://github.com/collective/collective.es.plone/issues
-- Source Code: https://github.com/collective/collective.es.plone
-- Documentation: https://docs.plone.org/foo/bar
+The sources are in a GIT DVCS with its main branches at `github <http://github.com/collective/collective.es.index>`_.
+There you can report issue too.
+
+We'd be happy to see many forks and pull-requests to make this addon even better.
+
+Maintainers are `Jens Klein <mailto:jk@kleinundpartner.at>`_, `Peter Holzer <mailto:peter.holzer@agitator.com>`_ and the BlueDynamics Alliance developer team.
+We appreciate any contribution and if a release is needed to be done on pypi, please just contact one of us.
+We also offer commercial support if any training, coaching, integration or adaptions are needed.
 
 
-Support
--------
+Contributions
+-------------
 
-If you are having issues, please let us know.
-We have a mailing list located at: project@example.com
+Initial implementation was made possible by `Evangelisch-reformierte Landeskirche des Kantons Zürich <http://zhref.ch/>`_.
+
+Idea and testing: Peter Holzer
+
+Concept & code by Jens W. Klein
+
+Authors:
+
+- no others so far
 
 
 License
