@@ -46,7 +46,7 @@ setup(
     zip_safe=False,
     python_requires=">=3.6",
     install_requires=[
-        'elasticsearch',
+        'collective.es.ingestion',
         'jinja2',
         'plone.restapi',
         'setuptools',

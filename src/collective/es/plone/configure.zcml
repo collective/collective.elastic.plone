@@ -45,4 +45,8 @@
   <adapter
       factory=".proxyindex.IndexNodeAdapter"
   />
+  <utility
+      factory=".queueprocessor.ElasticSearchIndexQueueProcessor"
+      name="collective.es.plone"
+      />
 </configure>
