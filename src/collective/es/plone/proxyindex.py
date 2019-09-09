@@ -3,7 +3,7 @@ from AccessControl import ClassSecurityInfo
 from AccessControl.requestmethod import postonly
 from App.class_init import InitializeClass
 from BTrees.IIBTree import IIBTree
-from collective.es.plone.eslib import get_es_client
+from collective.es.plone.eslib import get_ingest_client
 from collective.es.plone.eslib import index_name
 from collective.es.plone.eslib import query_blocker
 from OFS.SimpleItem import SimpleItem
@@ -166,7 +166,7 @@ class ElasticSearchProxyIndex(SimpleItem):
             scroll="1m",
             _source_include=["rid"],
         )
-        es = get_es_client()
+        es = get_ingest_client()
         result = es.search(**es_kwargs)
         # initial return value, other batches to be applied
 
@@ -191,7 +191,7 @@ class ElasticSearchProxyIndex(SimpleItem):
     def numObjects(self):
         """Return the number of indexed objects."""
         es_kwargs = dict(index=index_name(), body={"query": {"match_all": {}}})
-        es = get_es_client()
+        es = get_ingest_client()
         try:
             return es.count(**es_kwargs)["count"]
         except Exception:

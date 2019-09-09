@@ -25,12 +25,12 @@ Install collective.es.plone by adding it to your buildout::
         ...
         collective.es.plone
 
-    zope-conf-additional =
-        ...
-        <product-config elasticsearch>
-            addresses localhost:9200
-            use-ssl false
-        <product-config>
+    environment-vars +=
+        CELERY_BROKER redis://localhost:6379/0
+        ELASTICSEARCH_INDEX plone
+        ELASTICSEARCH_QUERY_SERVER http://localhost:9200
+        ELASTICSEARCH_QUERY_USE_SSL 0
+
 
 
 and then running ``bin/buildout``

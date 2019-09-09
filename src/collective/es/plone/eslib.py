@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-from App.config import getConfiguration
 from elasticsearch import Elasticsearch
-from plone import api
 
 import logging
+import os
 import threading
 
 
@@ -14,21 +13,24 @@ INDEX = "plone"
 _block_es_queries = threading.local()
 
 
-def get_es_client():
-    config = getConfiguration().product_config.get("elasticsearch", dict())
-    addresses = [x for x in config.get("clients", "").split(",") if x.strip()]
+def get_ingest_client():
+    """return elasticsearch client for ingestion
+    """
+    raw_addr = os.environ.get('ELASTICSEARCH_QUERY_SERVER', 'http://localhost:9200')
+    use_ssl = os.environ.get('ELASTICSEARCH_QUERY_USE_SSL', '0')
+    use_ssl = bool(int(use_ssl))
+    addresses = [x for x in raw_addr.split(",") if x.strip()]
     if not addresses:
         addresses.append("127.0.0.1:9200")
     return Elasticsearch(
         addresses,
-        use_ssl=config.get("use_ssl", False),
+        use_ssl=use_ssl,
         # here some more params need to be configured.
     )
 
 
 def index_name():
-    portal = api.portal.get()
-    return "plone_{0}".format(portal.getId()).lower()
+    return os.environ.get('ELASTICSEARCH_INDEX', 'plone')
 
 
 class _QueryBlocker(object):
