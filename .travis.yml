@@ -21,6 +21,7 @@ before_install:
   - ln -sf test_plone$PLONE_VERSION.cfg buildout.cfg
 
 install:
+  - pip3 install black isort
   - pip install -r requirements.txt -c constraints_plone$PLONE_VERSION.txt
   - buildout -N -t 3 code-analysis:return-status-codes=True annotate
   - buildout -N -t 3 code-analysis:return-status-codes=True
