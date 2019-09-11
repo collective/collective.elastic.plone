@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from App.config import getConfiguration
 from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
@@ -24,7 +23,6 @@ class CollectiveEsPloneLayer(PloneSandboxLayer):
         zope.installProduct(app, "collective.es.plone")
 
     def setUpPloneSite(self, portal):
-        getConfiguration().product_config = {"addresses": "localhost:9200"}
         applyProfile(portal, "collective.es.plone:default")
 
 

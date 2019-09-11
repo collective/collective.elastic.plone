@@ -13,7 +13,7 @@ INDEX = "plone"
 _block_es_queries = threading.local()
 
 
-def get_ingest_client():
+def get_query_client():
     """return elasticsearch client for ingestion
     """
     raw_addr = os.environ.get("ELASTICSEARCH_QUERY_SERVER", "http://localhost:9200")
