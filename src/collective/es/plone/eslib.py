@@ -16,8 +16,8 @@ _block_es_queries = threading.local()
 def get_ingest_client():
     """return elasticsearch client for ingestion
     """
-    raw_addr = os.environ.get('ELASTICSEARCH_QUERY_SERVER', 'http://localhost:9200')
-    use_ssl = os.environ.get('ELASTICSEARCH_QUERY_USE_SSL', '0')
+    raw_addr = os.environ.get("ELASTICSEARCH_QUERY_SERVER", "http://localhost:9200")
+    use_ssl = os.environ.get("ELASTICSEARCH_QUERY_USE_SSL", "0")
     use_ssl = bool(int(use_ssl))
     addresses = [x for x in raw_addr.split(",") if x.strip()]
     if not addresses:
@@ -30,7 +30,7 @@ def get_ingest_client():
 
 
 def index_name():
-    return os.environ.get('ELASTICSEARCH_INDEX', 'plone')
+    return os.environ.get("ELASTICSEARCH_INDEX", "plone")
 
 
 class _QueryBlocker(object):

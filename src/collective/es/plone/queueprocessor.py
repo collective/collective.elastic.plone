@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-from collective.es.plone.interfaces import IElasticSearchIndexQueueProcessor
 from collective.es.ingestion.celery import index
 from collective.es.ingestion.celery import unindex
 from collective.es.plone.eslib import index_name
+from collective.es.plone.interfaces import IElasticSearchIndexQueueProcessor
+from persistent.timestamp import TimeStamp
 from plone import api
 from zope.interface import implementer
-from persistent.timestamp import TimeStamp
 
 import logging
 
 
-logger = logging.getLogger('collective.es.index')
+logger = logging.getLogger("collective.es.index")
 
 
 @implementer(IElasticSearchIndexQueueProcessor)
@@ -20,7 +20,7 @@ class ElasticSearchIndexQueueProcessor(object):
     def index(self, obj, attributes=None):
         # get transaction id
         ts = TimeStamp(obj._p_serial)
-        index.delay('/'.join(obj.getPhysicalPath()), ts.timeTime(), index_name())
+        index.delay("/".join(obj.getPhysicalPath()), ts.timeTime(), index_name())
 
     def reindex(self, obj, attributes=None, update_metadata=1):
         self.index(obj, attributes)
