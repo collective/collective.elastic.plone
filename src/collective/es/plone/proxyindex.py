@@ -109,9 +109,10 @@ class ElasticSearchProxyIndex(SimpleItem):
     def getEntryForObject(self, documentId, default=None):
         """Get all information contained for 'documentId'.
 
-        We fetch here the tika converted text field from ES and return it.
+        We could fetch here the tika converted text field from ES and return it.
+
+        Future.
         """
-        # XXX TODO
         return ""
 
     def getIndexSourceNames(self):
