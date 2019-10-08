@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:zcml="http://namespaces.zope.org/zcml">
+
+  <plone:service
+      accept="application/json"
+      factory=".schema.SchemaService"
+      for="*"
+      method="GET"
+      name="@cesp-schema"
+      permission="zope2.View"
+  />
+</configure>
