@@ -20,7 +20,9 @@ class ElasticSearchIndexQueueProcessor(object):
     def index(self, obj, attributes=None):
         # get transaction id
         ts = TimeStamp(obj._p_serial)
-        logger.info(index.delay("/".join(obj.getPhysicalPath()), ts.timeTime(), index_name()))
+        logger.info(
+            index.delay("/".join(obj.getPhysicalPath()), ts.timeTime(), index_name())
+        )
 
     def reindex(self, obj, attributes=None, update_metadata=1):
         self.index(obj, attributes)
