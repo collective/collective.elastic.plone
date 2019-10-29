@@ -4,6 +4,8 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:zcml="http://namespaces.zope.org/zcml">
 
+  <include package="plone.rest" file="meta.zcml" />
+
   <plone:service
       accept="application/json"
       factory=".schema.SchemaService"
