@@ -14,4 +14,11 @@
       name="@cesp-schema"
       permission="zope2.View"
   />
+
+  <adapter
+    name="catalog_rid"
+    for="* *"
+    factory=".rid.RidExpansion"
+  />
+
 </configure>
