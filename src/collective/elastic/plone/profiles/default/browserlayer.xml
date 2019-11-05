@@ -2,6 +2,6 @@
 <layers>
   <layer
       name="collective.es.plone"
-      interface="collective.es.plone.interfaces.ICollectiveEsPloneLayer"
+      interface="collective.elastic.plone.interfaces.ICollectiveEsPloneLayer"
       />
 </layers>
