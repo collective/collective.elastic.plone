@@ -4,6 +4,7 @@
 *.mo
 *.py?
 *.swp
+elasticsearch
 # dirs
 bin/
 buildout-cache/
