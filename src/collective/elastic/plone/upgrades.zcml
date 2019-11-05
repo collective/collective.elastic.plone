@@ -8,7 +8,7 @@
     destination="1001"
     title="Reload GS profiles"
     description=""
-    profile="collective.es.plone:default"
+    profile="collective.elastic.plone:default"
     handler=".upgrades.reload_gs_profile"
     />-->
 

@@ -4,7 +4,7 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:five="http://namespaces.zope.org/five"
-    i18n_domain="collective.es.plone">
+    i18n_domain="collective.elastic.plone">
 
   <include package="Products.CMFPlone" />
 
@@ -23,7 +23,7 @@
       name="default"
       title="ElasticSearch indexer and index"
       directory="profiles/default"
-      description="Installs the collective.es.plone add-on."
+      description="Installs the collective.elastic.plone add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       post_handler=".setuphandlers.post_install"
       />
@@ -32,14 +32,14 @@
       name="uninstall"
       title="ElasticSearch indexer and index (uninstall)"
       directory="profiles/uninstall"
-      description="Uninstalls the collective.es.plone add-on."
+      description="Uninstalls the collective.elastic.plone add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       post_handler=".setuphandlers.uninstall"
       />
 
   <utility
       factory=".setuphandlers.HiddenProfiles"
-      name="collective.es.plone-hiddenprofiles"
+      name="collective.elastic.plone-hiddenprofiles"
       />
 
   <!-- -*- extra stuff goes here -*- -->
@@ -48,6 +48,6 @@
   />
   <utility
       factory=".queueprocessor.ElasticSearchIndexQueueProcessor"
-      name="collective.es.plone"
+      name="collective.elastic.plone"
       />
 </configure>

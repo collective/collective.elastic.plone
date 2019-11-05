@@ -2,11 +2,11 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="collective.es.plone">
+    i18n_domain="collective.elastic.plone">
 
   <!-- Publish static files -->
   <plone:static
-      name="collective.es.plone"
+      name="collective.elastic.plone"
       type="plone"
       directory="static"
       />
