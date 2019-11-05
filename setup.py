@@ -46,7 +46,7 @@ setup(
     zip_safe=False,
     python_requires=">=3.6",
     install_requires=[
-        'collective.elastic.ingestion',
+        'collective.elastic.ingest',
         'jinja2',
         'plone.restapi',
         'setuptools',

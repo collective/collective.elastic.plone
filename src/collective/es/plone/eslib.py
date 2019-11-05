@@ -14,7 +14,7 @@ _block_es_queries = threading.local()
 
 
 def get_query_client():
-    """return elasticsearch client for ingestion
+    """return elasticsearch client for.ingest
     """
     raw_addr = os.environ.get("ELASTICSEARCH_QUERY_SERVER", "http://localhost:9200")
     use_ssl = os.environ.get("ELASTICSEARCH_QUERY_USE_SSL", "0")

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from collective.elastic.ingestion.celery import index
-from collective.elastic.ingestion.celery import unindex
+from collective.elastic.ingest.celery import index
+from collective.elastic.ingest.celery import unindex
 from collective.elastic.plone.eslib import index_name
 from collective.elastic.plone.interfaces import IElasticSearchIndexQueueProcessor
 from persistent.timestamp import TimeStamp
