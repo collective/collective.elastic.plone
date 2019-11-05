@@ -42,7 +42,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'collective.es.plone'
+project = u'collective.elastic.plone'
 copyright = u'Jens W. Klein (jensens)'
 author = u'Jens W. Klein (jensens)'
 
@@ -199,7 +199,7 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'collective.es.plonedoc'
+htmlhelp_basename = 'collective.elastic.plonedoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 

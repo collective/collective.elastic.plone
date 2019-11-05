@@ -3,11 +3,11 @@
 from zope.i18nmessageid import MessageFactory
 
 
-_ = MessageFactory("collective.es.plone")
+_ = MessageFactory("collective.elastic.plone")
 
 
 def initialize(context):
-    from collective.es.plone import proxyindex
+    from collective.elastic.plone import proxyindex
 
     context.registerClass(
         proxyindex.ElasticSearchProxyIndex,

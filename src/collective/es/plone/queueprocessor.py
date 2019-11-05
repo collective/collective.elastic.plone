@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from collective.es.ingestion.celery import index
-from collective.es.ingestion.celery import unindex
-from collective.es.plone.eslib import index_name
-from collective.es.plone.interfaces import IElasticSearchIndexQueueProcessor
+from collective.elastic.ingestion.celery import index
+from collective.elastic.ingestion.celery import unindex
+from collective.elastic.plone.eslib import index_name
+from collective.elastic.plone.interfaces import IElasticSearchIndexQueueProcessor
 from persistent.timestamp import TimeStamp
 from plone import api
 from zope.interface import implementer
@@ -10,7 +10,7 @@ from zope.interface import implementer
 import logging
 
 
-logger = logging.getLogger("collective.es.index")
+logger = logging.getLogger("collective.elastic.index")
 
 
 @implementer(IElasticSearchIndexQueueProcessor)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
-from collective.es.plone.testing import COLLECTIVE_ES_PLONE_INTEGRATION_TESTING
+from collective.elastic.plone.testing import COLLECTIVE_ES_PLONE_INTEGRATION_TESTING
 
 import unittest
 
@@ -47,7 +47,7 @@ class TestESProxyIndexBasics(unittest.TestCase):
         """Custom shared utility setup for following tests."""
         self.catalog = self.layer["portal"]["portal_catalog"]
         # install index
-        from collective.es.plone.proxyindex import ElasticSearchProxyIndex
+        from collective.elastic.plone.proxyindex import ElasticSearchProxyIndex
 
         espi = ElasticSearchProxyIndex(
             "espi", extra={"query_template": TEST_TEMPLATE_SIMPLE}, caller=self.catalog
@@ -73,7 +73,7 @@ class TestESProxyIndexAllQuery(unittest.TestCase):
         """Custom shared utility setup for following tests."""
         self.catalog = self.layer["portal"]["portal_catalog"]
         # install index
-        from collective.es.plone.proxyindex import ElasticSearchProxyIndex
+        from collective.elastic.plone.proxyindex import ElasticSearchProxyIndex
 
         espi = ElasticSearchProxyIndex(
             "espi",
@@ -97,7 +97,7 @@ class TestESProxyIndexFulltext(unittest.TestCase):
         """Custom shared utility setup for following tests."""
         self.catalog = self.layer["portal"]["portal_catalog"]
         # install index
-        from collective.es.plone.proxyindex import ElasticSearchProxyIndex
+        from collective.elastic.plone.proxyindex import ElasticSearchProxyIndex
 
         espi = ElasticSearchProxyIndex(
             "espi",

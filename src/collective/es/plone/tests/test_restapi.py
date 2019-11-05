@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from collective.es.plone.testing import COLLECTIVE_ES_PLONE_INTEGRATION_TESTING
+from collective.elastic.plone.testing import COLLECTIVE_ES_PLONE_INTEGRATION_TESTING
 
 
 import unittest
@@ -13,7 +13,7 @@ class TestRestAPI(unittest.TestCase):
     layer = COLLECTIVE_ES_PLONE_INTEGRATION_TESTING
 
     def test_schema_api(self):
-        from collective.es.plone.restapi.schema import SchemaService
+        from collective.elastic.plone.restapi.schema import SchemaService
 
         result = SchemaService().reply()
         expected = {

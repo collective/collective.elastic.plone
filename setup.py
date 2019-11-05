@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Installer for the collective.es.plone package."""
+"""Installer for the collective.elastic.plone package."""
 
 from setuptools import find_packages
 from setuptools import setup
@@ -13,7 +13,7 @@ long_description = '\n\n'.join([
 
 
 setup(
-    name='collective.es.plone',
+    name='collective.elastic.plone',
     version='1.0a1',
     description="Addon for ElasticSearch integration with Plone",
     long_description=long_description,
@@ -31,22 +31,22 @@ setup(
     keywords='Python Plone',
     author='Jens W. Klein',
     author_email='jk@kleinundpartner.at',
-    url='https://github.com/collective/collective.es.plone',
+    url='https://github.com/collective/collective.elastic.plone',
     project_urls={
-        'PyPI': 'https://pypi.python.org/pypi/collective.es.plone',
-        'Source': 'https://github.com/collective/collective.es.plone',
-        'Tracker': 'https://github.com/collective/collective.es.plone/issues',
-        # 'Documentation': 'https://collective.es.plone.readthedocs.io/en/latest/',
+        'PyPI': 'https://pypi.python.org/pypi/collective.elastic.plone',
+        'Source': 'https://github.com/collective/collective.elastic.plone',
+        'Tracker': 'https://github.com/collective/collective.elastic.plone/issues',
+        # 'Documentation': 'https://collective.elastic.plone.readthedocs.io/en/latest/',
     },
     license='GPL version 2',
     packages=find_packages('src', exclude=['ez_setup']),
-    namespace_packages=['collective', 'collective.es'],
+    namespace_packages=['collective', 'collective.elastic'],
     package_dir={'': 'src'},
     include_package_data=True,
     zip_safe=False,
     python_requires=">=3.6",
     install_requires=[
-        'collective.es.ingestion',
+        'collective.elastic.ingestion',
         'jinja2',
         'plone.restapi',
         'setuptools',

@@ -3,19 +3,19 @@
    This text does not appear on pypi or github. It is a comment.
 
 ===================
-collective.es.plone
+collective.elastic.plone
 ===================
 
 ElasticSearch Integration for Plone content
 
-- indexer passing content to an `collective.es.ingestion` service.
+- indexer passing content to an `collective.elastic.ingestion` service.
 - index acting as a proxy to ElasticSearch, integrates with ZCatalog
 - custom plugins for `plone.restapi` to provide strcutural information for the igestions service
 
 Installation
 ------------
 
-Install collective.es.plone by adding it to your buildout::
+Install collective.elastic.plone by adding it to your buildout::
 
     [buildout]
 
@@ -23,7 +23,7 @@ Install collective.es.plone by adding it to your buildout::
 
     eggs =
         ...
-        collective.es.plone
+        collective.elastic.plone
 
     environment-vars +=
         CELERY_BROKER redis://localhost:6379/0
@@ -39,7 +39,7 @@ and then running ``bin/buildout``
 Source Code
 -----------
 
-The sources are in a GIT DVCS with its main branches at `github <http://github.com/collective/collective.es.index>`_.
+The sources are in a GIT DVCS with its main branches at `github <http://github.com/collective/collective.elastic.index>`_.
 There you can report issue too.
 
 We'd be happy to see many forks and pull-requests to make this addon even better.

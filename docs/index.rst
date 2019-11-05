@@ -1,5 +1,5 @@
 ===================
-collective.es.plone
+collective.elastic.plone
 ===================
 
 User documentation

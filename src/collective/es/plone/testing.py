@@ -16,14 +16,14 @@ class CollectiveEsPloneLayer(PloneSandboxLayer):
         # The z3c.autoinclude feature is disabled in the Plone fixture base
         # layer.
         import plone.restapi
-        import collective.es.plone
+        import collective.elastic.plone
 
         self.loadZCML(package=plone.restapi)
-        self.loadZCML(package=collective.es.plone)
-        zope.installProduct(app, "collective.es.plone")
+        self.loadZCML(package=collective.elastic.plone)
+        zope.installProduct(app, "collective.elastic.plone")
 
     def setUpPloneSite(self, portal):
-        applyProfile(portal, "collective.es.plone:default")
+        applyProfile(portal, "collective.elastic.plone:default")
 
 
 COLLECTIVE_ES_PLONE_FIXTURE = CollectiveEsPloneLayer()

@@ -3,9 +3,9 @@ from AccessControl import ClassSecurityInfo
 from AccessControl.requestmethod import postonly
 from App.class_init import InitializeClass
 from BTrees.IIBTree import IIBTree
-from collective.es.plone.eslib import get_query_client
-from collective.es.plone.eslib import index_name
-from collective.es.plone.eslib import query_blocker
+from collective.elastic.plone.eslib import get_query_client
+from collective.elastic.plone.eslib import index_name
+from collective.elastic.plone.eslib import query_blocker
 from OFS.SimpleItem import SimpleItem
 from Products.GenericSetup.interfaces import ISetupEnviron
 from Products.GenericSetup.utils import NodeAdapterBase
