@@ -11,6 +11,6 @@ class RidExpansion(object):
         self.request = request
 
     def __call__(self, expand=False):
-        cat = api.portal.get_tool('portal_catalog')
-        path = '/'.join(self.context.getPhysicalPath())
+        cat = api.portal.get_tool("portal_catalog")
+        path = "/".join(self.context.getPhysicalPath())
         return {"catalog_rid": cat.getrid(path)}
