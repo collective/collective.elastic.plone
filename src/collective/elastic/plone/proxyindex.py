@@ -157,7 +157,12 @@ class ElasticSearchProxyIndex(SimpleItem):
         record = parseIndexRequest(request, self.id)
         if record.keys is None:
             return None
-        template_params = {"keys": record.keys}
+        keys = []
+        for key in record.keys:
+            if not isinstance(key, bytes):
+                key = key.encode('utf8')
+            keys.append(key)
+        template_params = {"keys": keys}
         query_body = self._apply_template(template_params)
         logger.info(query_body)
         es_kwargs = dict(
@@ -165,7 +170,7 @@ class ElasticSearchProxyIndex(SimpleItem):
             body=query_body,
             size=BATCH_SIZE,
             scroll="1m",
-            _source_include=["rid"],
+            _source_includes=["rid"],
         )
         es = get_query_client()
         result = es.search(**es_kwargs)
@@ -178,7 +183,7 @@ class ElasticSearchProxyIndex(SimpleItem):
         for r in result["hits"]["hits"]:
             retval[r["_source"]["rid"]] = score(r)
 
-        total = result["hits"]["total"]
+        total = result["hits"]["total"]["value"]
         if total > BATCH_SIZE:
             sid = result["_scroll_id"]
             counter = BATCH_SIZE
@@ -226,7 +231,10 @@ class ElasticSearchProxyIndex(SimpleItem):
     ###########################################################################
 
     def _apply_template(self, template_data):
-        tpl = jinja_loader.from_string(self.query_template)
+        query_template = self.query_template
+        if isinstance(query_template, bytes):
+            query_template = query_template.decode('utf8')
+        tpl = jinja_loader.from_string(query_template)
         query_text = tpl.render(template_data)
         return json.loads(query_text)
 

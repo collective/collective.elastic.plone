@@ -5,16 +5,53 @@
     <querytemplate>
 {
     "query":{
-        "query_string":{
-            "query":"{{keys[0].replace('"', '')}}",
-            "fields":[
-                "title^1.2",
-                "description^1.1",
-                "subjects^2",
-                "extracted_text",
-                "extracted_file",
-                "extracted_image"
-            ]
+        "bool":{
+            "should":[
+                    {
+                        "query_string":{
+                            "query":"{{keys[0].decode('utf8')}}",
+                            "fields":[
+                                "title^1.2",
+                                "id",
+                                "description^1.1",
+                                "subjects^2",
+                                ]
+                        }
+                    },
+                    {
+                        "nested":{
+                            "path":"text__extracted",
+                            "query":{
+                                "query_string":{
+                                    "query":"{{keys[0].decode('utf8')}}",
+                                    "fields":["text__extracted.content"]
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "nested":{
+                            "path":"file__extracted",
+                            "query":{
+                                "query_string":{
+                                    "query":"{{keys[0].decode('utf8')}}",
+                                    "fields":["file__extracted.content"]
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "nested":{
+                            "path":"image__extracted",
+                            "query":{
+                                "query_string":{
+                                    "query":"{{keys[0].decode('utf8')}}",
+                                    "fields":["image__extracted.content"]
+                                }
+                            }
+                        }
+                    }
+                ]
         }
     }
 }
