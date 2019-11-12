@@ -14,7 +14,7 @@
                                 "title^1.2",
                                 "id",
                                 "description^1.1",
-                                "subjects^2",
+                                "subjects^2"
                                 ]
                         }
                     },
@@ -47,11 +47,11 @@
                                 "query_string":{
                                     "query":"{{keys[0].decode('utf8')}}",
                                     "fields":["image__extracted.content"]
-                                }
                             }
                         }
                     }
-                ]
+                }
+            ]
         }
     }
 }
