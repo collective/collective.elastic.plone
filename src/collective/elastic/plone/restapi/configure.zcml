@@ -17,8 +17,14 @@
 
   <adapter
     name="catalog_rid"
-    for="* *"
-    factory=".rid.RidExpansion"
+    for="plone.dexterity.interfaces.IDexterityContent *"
+    factory=".expansions.RidExpansion"
+  />
+
+  <adapter
+    name="last_indexing_queued_timestamp"
+    for="plone.dexterity.interfaces.IDexterityContent *"
+    factory=".expansions.TimestampExpansion"
   />
 
 </configure>

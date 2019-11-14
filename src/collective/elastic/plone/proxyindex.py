@@ -160,7 +160,7 @@ class ElasticSearchProxyIndex(SimpleItem):
         keys = []
         for key in record.keys:
             if not isinstance(key, bytes):
-                key = key.encode('utf8')
+                key = key.encode("utf8")
             keys.append(key)
         template_params = {"keys": keys}
         query_body = self._apply_template(template_params)
@@ -233,7 +233,7 @@ class ElasticSearchProxyIndex(SimpleItem):
     def _apply_template(self, template_data):
         query_template = self.query_template
         if isinstance(query_template, bytes):
-            query_template = query_template.decode('utf8')
+            query_template = query_template.decode("utf8")
         tpl = jinja_loader.from_string(query_template)
         query_text = tpl.render(template_data)
         return json.loads(query_text)

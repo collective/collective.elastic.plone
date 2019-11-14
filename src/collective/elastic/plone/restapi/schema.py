@@ -14,13 +14,21 @@ def dottedname(obj):
         return module + "." + obj.__class__.__name__
 
 
+def _field(field, name=None):
+    """serialize a single field definition for ES
+    """
+    record = {"field": dottedname(field)}
+    if name:
+        record["name"] = name
+    value_type = getattr(field, "value_type", None)
+    if value_type:
+        record["value_type"] = _field(value_type)
+    return record
+
+
 class SchemaService(Service):
     def _fields(self, schema):
-        result = []
-        for name, field in getFieldsInOrder(schema):
-            record = {"name": name, "field": dottedname(field)}
-            result.append(record)
-        return result
+        return [_field(field, name=name) for name, field in getFieldsInOrder(schema)]
 
     def reply(self):
         result = {"types": {}, "behaviors": {}}
