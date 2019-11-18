@@ -5,7 +5,6 @@ from App.class_init import InitializeClass
 from BTrees.IIBTree import IIBTree
 from collective.elastic.plone.eslib import get_query_client
 from collective.elastic.plone.eslib import index_name
-from collective.elastic.plone.eslib import query_blocker
 from OFS.SimpleItem import SimpleItem
 from Products.GenericSetup.interfaces import ISetupEnviron
 from Products.GenericSetup.utils import NodeAdapterBase

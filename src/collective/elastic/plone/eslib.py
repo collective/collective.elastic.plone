@@ -3,14 +3,9 @@ from elasticsearch import Elasticsearch
 
 import logging
 import os
-import threading
 
 
 logger = logging.getLogger(__name__)
-
-INDEX = "plone"
-
-_block_es_queries = threading.local()
 
 
 def get_query_client():
@@ -31,18 +26,3 @@ def get_query_client():
 
 def index_name():
     return os.environ.get("ELASTICSEARCH_INDEX", "plone")
-
-
-class _QueryBlocker(object):
-    @property
-    def blocked(self):
-        return getattr(_block_es_queries, "blocked", False)
-
-    def block(self):
-        return setattr(_block_es_queries, "blocked", True)
-
-    def unblock(self):
-        return setattr(_block_es_queries, "blocked", False)
-
-
-query_blocker = _QueryBlocker()
