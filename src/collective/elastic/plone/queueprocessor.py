@@ -3,8 +3,8 @@ from collective.elastic.ingest.celery import index
 from collective.elastic.ingest.celery import unindex
 from collective.elastic.plone.eslib import index_name
 from collective.elastic.plone.interfaces import IElasticSearchIndexQueueProcessor
-from plone.dexterity.interfaces import IDexterityContent
 from plone import api
+from plone.dexterity.interfaces import IDexterityContent
 from zope.annotation import IAnnotations
 from zope.interface import implementer
 
