@@ -11,4 +11,11 @@
       directory="static"
       />
 
+  <browser:page
+        for="*"
+        name="update-elasticsearch"
+        permission="cmf.ManagePortal"
+        class=".update.UpdateElastisearch"
+        />
+
 </configure>
