@@ -160,6 +160,7 @@ class ElasticSearchProxyIndex(SimpleItem):
                 key = key.encode("utf8")
             keys.append(key)
         template_params = {"keys": keys}
+        __traceback_info__ = "template parameters: {0}".format(str(keys))
         query_body = self._apply_template(template_params)
         logger.info(query_body)
         es_kwargs = dict(
