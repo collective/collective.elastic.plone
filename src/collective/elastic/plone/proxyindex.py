@@ -151,8 +151,6 @@ class ElasticSearchProxyIndex(SimpleItem):
         records.  The second object is a tuple containing the names of
         all data fields used.
         """
-        if query_blocker.blocked:
-            return
         record = parseIndexRequest(request, self.id)
         if record.keys is None:
             return None
