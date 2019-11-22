@@ -159,7 +159,7 @@ class ElasticSearchProxyIndex(SimpleItem):
             if not isinstance(key, bytes):
                 key = key.encode("utf8")
             key = key.replace("\\", "\\\\")
-            key = key.replace(r'"', r'\\"')
+            key = key.replace('"', '\\"')
             keys.append(key)
         template_params = {"keys": keys}
         __traceback_info__ = "template parameters: {0}".format(str(template_params))
@@ -236,6 +236,7 @@ class ElasticSearchProxyIndex(SimpleItem):
             query_template = query_template.decode("utf8")
         tpl = jinja_loader.from_string(query_template)
         query_text = tpl.render(template_data)
+        __traceback_info__ = "rendered template:\n{0}".format(query_text)
         return json.loads(query_text)
 
 
