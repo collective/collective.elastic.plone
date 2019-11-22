@@ -156,10 +156,9 @@ class ElasticSearchProxyIndex(SimpleItem):
             return None
         keys = []
         for key in record.keys:
+            key = key.replace("\\", "\\\\").replace('"', '\"')
             if not isinstance(key, bytes):
                 key = key.encode("utf8")
-            key = key.replace(b"\\", b"\\\\")
-            key = key.replace(b'"', b'\"')
             keys.append(key)
         template_params = {"keys": keys}
         __traceback_info__ = "template parameters: {0}".format(template_params)
