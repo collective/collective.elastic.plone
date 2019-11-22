@@ -158,11 +158,11 @@ class ElasticSearchProxyIndex(SimpleItem):
         for key in record.keys:
             if not isinstance(key, bytes):
                 key = key.encode("utf8")
-            key = key.replace("\\", "\\\\")
-            key = key.replace('"', '\\"')
+            key = key.replace(b"\\", b"\\\\")
+            key = key.replace(b'"', b'\"')
             keys.append(key)
         template_params = {"keys": keys}
-        __traceback_info__ = "template parameters: {0}".format(str(template_params))
+        __traceback_info__ = "template parameters: {0}".format(template_params)
         query_body = self._apply_template(template_params)
         logger.info(query_body)
         es_kwargs = dict(
