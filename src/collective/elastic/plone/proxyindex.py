@@ -156,7 +156,7 @@ class ElasticSearchProxyIndex(SimpleItem):
             return None
         keys = []
         for key in record.keys:
-            key = json.encoder.encode_basestring(key)
+            key = key.replace("\\", '').replace('"', "")
             if not isinstance(key, bytes):
                 key = key.encode("utf8")
             keys.append(key)
