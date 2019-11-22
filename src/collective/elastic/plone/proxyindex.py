@@ -5,6 +5,8 @@ from App.class_init import InitializeClass
 from BTrees.IIBTree import IIBTree
 from collective.elastic.plone.eslib import get_query_client
 from collective.elastic.plone.eslib import index_name
+from elasticsearch.exceptions import RequestError
+from elasticsearch.exceptions import TransportError
 from OFS.SimpleItem import SimpleItem
 from Products.GenericSetup.interfaces import ISetupEnviron
 from Products.GenericSetup.utils import NodeAdapterBase
@@ -156,7 +158,7 @@ class ElasticSearchProxyIndex(SimpleItem):
             return None
         keys = []
         for key in record.keys:
-            key = key.replace("\\", '').replace('"', "")
+            key = key.replace("\\", "").replace('"', "")
             if not isinstance(key, bytes):
                 key = key.encode("utf8")
             keys.append(key)
@@ -172,7 +174,14 @@ class ElasticSearchProxyIndex(SimpleItem):
             _source_includes=["rid"],
         )
         es = get_query_client()
-        result = es.search(**es_kwargs)
+        try:
+            result = es.search(**es_kwargs)
+        except RequestError:
+            logger.info("Query failed:\n{0}".format(query_body))
+            return None
+        except TransportError:
+            logger.exception("ElasticSearch failed")
+            return None
         # initial return value, other batches to be applied
 
         def score(record):
