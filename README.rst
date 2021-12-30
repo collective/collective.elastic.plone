@@ -8,7 +8,7 @@ collective.elastic.plone
 
 ElasticSearch Integration for Plone content
 
-- indexer passing content to an `collective.elastic.ingest` service.
+- indexer passing content to a separate running `collective.elastic.ingest <https://github.com/collective/collective.elastic.ingest>`_ service.
 - index acting as a proxy to ElasticSearch, integrates with ZCatalog
 - custom plugins for `plone.restapi` to provide structural information for the ingestions service
 
