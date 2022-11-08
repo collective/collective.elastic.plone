@@ -2,9 +2,9 @@
    If you want to learn more about writing documentation, please check out: http://docs.plone.org/about/documentation_styleguide.html
    This text does not appear on pypi or github. It is a comment.
 
-===================
+========================
 collective.elastic.plone
-===================
+========================
 
 ElasticSearch Integration for Plone content
 
@@ -15,7 +15,7 @@ ElasticSearch Integration for Plone content
 Installation
 ------------
 
-Install collective.elastic.plone by adding it to your buildout::
+Install `collective.elastic.plone`` by adding it to your buildout::
 
     [buildout]
 
@@ -60,7 +60,7 @@ Concept & code by Jens W. Klein
 
 Authors:
 
-- no others so far
+- Katja Süss (Github: @ksuess)
 
 
 License
