@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 from AccessControl import ClassSecurityInfo
+
+try:
+    from AccessControl.class_init import InitializeClass
+except ImportError:
+    from App.class_init import InitializeClass
 from AccessControl.requestmethod import postonly
-from App.class_init import InitializeClass
 from BTrees.IIBTree import IIBTree
 from collective.elastic.plone.eslib import get_query_client
 from collective.elastic.plone.eslib import index_name
@@ -11,7 +15,11 @@ from OFS.SimpleItem import SimpleItem
 from Products.GenericSetup.interfaces import ISetupEnviron
 from Products.GenericSetup.utils import NodeAdapterBase
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from Products.PluginIndexes.common.util import parseIndexRequest
+
+try:
+    from Products.ZCatalog.query import IndexQuery
+except ImportError:
+    from Products.PluginIndexes.common.util import parseIndexRequest as IndexQuery
 from Products.PluginIndexes.interfaces import ISortIndex
 from zope.component import adapter
 from zope.interface import implementer
@@ -82,7 +90,7 @@ class ElasticSearchProxyIndex(SimpleItem):
     @security.protected(MGMT_PERMISSION)
     @postonly
     def manage_ESPIndexExtras(self, REQUEST):
-        """stores changed extras """
+        """stores changed extras"""
         self.query_template = REQUEST.form["extra"]["query_template"]
         REQUEST["RESPONSE"].redirect(
             "{0}/manage_catalogIndexes?manage_tabs_message=Updated "
@@ -153,7 +161,7 @@ class ElasticSearchProxyIndex(SimpleItem):
         records.  The second object is a tuple containing the names of
         all data fields used.
         """
-        record = parseIndexRequest(request, self.id)
+        record = IndexQuery(request, self.id)
         if record.keys is None:
             return None
         keys = []
@@ -252,13 +260,11 @@ InitializeClass(ElasticSearchProxyIndex)
 
 @adapter(ElasticSearchProxyIndex, ISetupEnviron)
 class IndexNodeAdapter(NodeAdapterBase):
-    """Node im- and exporter for Index.
-    """
+    """Node im- and exporter for Index."""
 
     @property
     def node(self):
-        """Export the object as a DOM node.
-        """
+        """Export the object as a DOM node."""
         node = self._getObjectNode("index")
         child = self._doc.createElement("querytemplate")
         text = self._doc.createTextNode(self.context.query_template)
@@ -268,8 +274,7 @@ class IndexNodeAdapter(NodeAdapterBase):
 
     @node.setter
     def node(self, node):
-        """Import the object from the DOM node.
-        """
+        """Import the object from the DOM node."""
         child_nodes = [
             x
             for x in node.childNodes
