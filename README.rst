@@ -15,7 +15,7 @@ ElasticSearch Integration for Plone content
 Installation
 ------------
 
-Install `collective.elastic.plone`` by adding it to your buildout::
+Install `collective.elastic.plone` by adding it to your buildout::
 
     [buildout]
 
