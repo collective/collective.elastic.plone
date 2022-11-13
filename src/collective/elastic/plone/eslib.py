@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from elasticsearch import Elasticsearch
 from collective.elastic.ingest import ELASTICSEARCH_7
+from elasticsearch import Elasticsearch
 
 import logging
 import os

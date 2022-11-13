@@ -2,6 +2,7 @@
 from plone.restapi.services import Service as BaseService
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
+
 import collections
 import json
 
