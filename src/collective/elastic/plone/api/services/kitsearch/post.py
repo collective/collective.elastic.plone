@@ -15,7 +15,7 @@ class Kitsearch(object):
         self.context = context.aq_explicit
         self.request = request
 
-    def __call__(self, data):
+    def __call__(self, expand=False, data=None):
         result = {
             "kitsearch": {
                 "@id": "{}/@kitsearch".format(
@@ -23,6 +23,10 @@ class Kitsearch(object):
                 ),
             },
         }
+
+        if not expand:
+            return result
+
         if not data:
             return result
 
@@ -39,4 +43,4 @@ class KitsearchGet(Service):
     def reply(self):
         data = json_body(self.request)
         service_factory = Kitsearch(self.context, self.request)
-        return service_factory(data=data)["kitsearch"]
+        return service_factory(expand=True, data=data)["kitsearch"]
