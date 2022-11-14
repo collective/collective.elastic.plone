@@ -2,11 +2,9 @@
   xmlns="http://namespaces.zope.org/zope"
   xmlns:plone="http://namespaces.plone.org/plone">
 
-  <adapter factory=".post.Kitsearch" name="kitsearch"/>
-
   <plone:service
     method="POST"
-    for="zope.interface.Interface"
+    for="Products.CMFCore.interfaces.ISiteRoot"
     factory=".post.KitsearchGet"
     name="@kitsearch"
     permission="zope2.View"

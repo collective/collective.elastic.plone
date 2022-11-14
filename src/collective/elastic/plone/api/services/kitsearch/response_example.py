@@ -1,4 +1,4 @@
-elasticsearchresponse = """
+elasticsearchresponse_example = """
 {
     "took": 58,
     "timed_out": false,
@@ -23,7 +23,7 @@ elasticsearchresponse = """
                     "parent": {
                         "image_scales": null,
                         "@type": "Document",
-                        "description": "Pages with meta data \"Informationtype\"",
+                        "description": "Pages with meta data 'Informationtype'",
                         "@id": "http://localhost:8080/Plone/example-content",
                         "title": "Example Content",
                         "image_field": null,
@@ -63,7 +63,7 @@ elasticsearchresponse = """
                     "modified": "2022-11-13T15:18:42+00:00",
                     "@id": "http://localhost:8080/Plone/example-content/swimming-from-summer-to-summer",
                     "id": "swimming-from-summer-to-summer",
-                    "blocks_plaintext": "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.  So das war der Sommer schon fast.  Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper.\r\rSed posuere consectetur est at lobortis. Duis mollis, est non commodo luctus, .",
+                    "blocks_plaintext": "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.  So das war der Sommer schon fast.  Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Sed posuere consectetur est at lobortis. Duis mollis, est non commodo luctus, .",
                     "created": "2022-11-13T14:05:47+00:00",
                     "review_state": "published",
                     "is_folderish": true,
@@ -88,7 +88,7 @@ elasticsearchresponse = """
                     "parent": {
                         "image_scales": null,
                         "@type": "Document",
-                        "description": "Pages with meta data \"Informationtype\"",
+                        "description": "Pages with meta data Informationtype",
                         "@id": "http://localhost:8080/Plone/example-content",
                         "title": "Example Content",
                         "image_field": null,
