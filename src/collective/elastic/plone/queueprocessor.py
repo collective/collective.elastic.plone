@@ -17,7 +17,7 @@ logger = logging.getLogger("collective.elastic.index")
 
 @implementer(IElasticSearchIndexQueueProcessor)
 class ElasticSearchIndexQueueProcessor(object):
-    """ a queue processor for ElasticSearch"""
+    """a queue processor for ElasticSearch"""
 
     def index(self, obj, attributes=None):
         if not IDexterityContent.providedBy(obj):
