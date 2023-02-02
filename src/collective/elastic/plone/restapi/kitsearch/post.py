@@ -52,6 +52,13 @@ class Kitsearch(Service):
                     arau.append(f"user:{grp.id}")
                 arau.append("Anonymous")
 
+            # Enrich original query with "allowedRolesAndUsers"
+            if not esquery["elasticsearch_payload"].get("post_filter"):
+                esquery["elasticsearch_payload"] = {"bool": {"must": []}}
+            if not esquery["elasticsearch_payload"]["post_filter"].get("bool"):
+                esquery["elasticsearch_payload"]["post_filter"] = {"bool": {"must": []}}
+            if not esquery["elasticsearch_payload"]["post_filter"]["bool"].get("must"):
+                esquery["elasticsearch_payload"]["post_filter"]["bool"] = {"must": []}
             esquery["elasticsearch_payload"]["post_filter"]["bool"]["must"].append(
                 {"terms": {"allowedRolesAndUsers.keyword": arau}}
             )
