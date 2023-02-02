@@ -62,6 +62,16 @@ class Kitsearch(Service):
             esquery["elasticsearch_payload"]["post_filter"]["bool"]["must"].append(
                 {"terms": {"allowedRolesAndUsers.keyword": arau}}
             )
+        # Enrich query with aggregation info on sections
+        if not esquery["elasticsearch_payload"].get("aggs"):
+            esquery["elasticsearch_payload"]["aggs"] = {}
+        esquery["elasticsearch_payload"]["aggs"]["section_agg"] = {
+            "terms": {"field": "section.keyword"}
+        }
+        print(
+            'esquery["elasticsearch_payload"]["aggs"]',
+            esquery["elasticsearch_payload"]["aggs"],
+        )
         return esquery
 
     def reply(self):
