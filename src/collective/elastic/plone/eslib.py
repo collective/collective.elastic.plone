@@ -9,9 +9,11 @@ import os
 logger = logging.getLogger(__name__)
 
 
-def get_query_client():
+def get_query_client(elasticsearch_server_baseurl=None):
     """return elasticsearch client for ingest"""
-    raw_addr = os.environ.get("ELASTICSEARCH_QUERY_SERVER", "http://localhost:9200")
+    raw_addr = elasticsearch_server_baseurl or os.environ.get(
+        "ELASTICSEARCH_QUERY_SERVER", "http://localhost:9200"
+    )
     use_ssl = os.environ.get("ELASTICSEARCH_QUERY_USE_SSL", "0")
     use_ssl = bool(int(use_ssl))
     addresses = [x for x in raw_addr.split(",") if x.strip()]

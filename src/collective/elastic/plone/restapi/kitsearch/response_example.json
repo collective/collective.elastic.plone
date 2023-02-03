@@ -1,0 +1,674 @@
+{
+    "_scroll_id": "FGluY2x1ZGVfY29udGV4dF91dWlkDXF1ZXJ5QW5kRmV0Y2gBFnQ2VGZaenAtVEQ2MF9HdHZqQ1ozY0EAAAAAAAEuOBZrZWtzc3g0M1FjLUJyaTRvNm52MGdR", 
+    "_shards": {
+      "failed": 0, 
+      "skipped": 0, 
+      "successful": 1, 
+      "total": 1
+    }, 
+    "aggregations": {
+      "informationtype_agg": {
+        "doc_count": 3, 
+        "inner": {
+          "doc_count": 4, 
+          "informationtype_token": {
+            "buckets": [
+              {
+                "doc_count": 1, 
+                "key": "4f3dcd23-81f8-4a8b-8e51-b05661785349", 
+                "somemoredatafromelasticsearch": {
+                  "hits": {
+                    "hits": [
+                      {
+                        "_id": "2188b34d716d448f9e377fb8597cbe87", 
+                        "_index": "plone2020", 
+                        "_nested": {
+                          "field": "informationtype", 
+                          "offset": 0
+                        }, 
+                        "_score": 3.8458786, 
+                        "_source": {
+                          "title": "Prozess-Dokumentation", 
+                          "token": "4f3dcd23-81f8-4a8b-8e51-b05661785349"
+                        }
+                      }
+                    ], 
+                    "max_score": 3.8458786, 
+                    "total": {
+                      "relation": "eq", 
+                      "value": 1
+                    }
+                  }
+                }
+              }, 
+              {
+                "doc_count": 1, 
+                "key": "anleitung", 
+                "somemoredatafromelasticsearch": {
+                  "hits": {
+                    "hits": [
+                      {
+                        "_id": "d59278dcffb74f079498601e1d164bef", 
+                        "_index": "plone2020", 
+                        "_nested": {
+                          "field": "informationtype", 
+                          "offset": 0
+                        }, 
+                        "_score": 6.2048616, 
+                        "_source": {
+                          "title": "Anleitung", 
+                          "token": "anleitung"
+                        }
+                      }
+                    ], 
+                    "max_score": 6.2048616, 
+                    "total": {
+                      "relation": "eq", 
+                      "value": 1
+                    }
+                  }
+                }
+              }, 
+              {
+                "doc_count": 1, 
+                "key": "faq", 
+                "somemoredatafromelasticsearch": {
+                  "hits": {
+                    "hits": [
+                      {
+                        "_id": "e5c777c9ca6e4c3ca88bb7e720a355be", 
+                        "_index": "plone2020", 
+                        "_nested": {
+                          "field": "informationtype", 
+                          "offset": 0
+                        }, 
+                        "_score": 5.379884, 
+                        "_source": {
+                          "title": "FAQ", 
+                          "token": "faq"
+                        }
+                      }
+                    ], 
+                    "max_score": 5.379884, 
+                    "total": {
+                      "relation": "eq", 
+                      "value": 1
+                    }
+                  }
+                }
+              }, 
+              {
+                "doc_count": 1, 
+                "key": "kurzanleitung", 
+                "somemoredatafromelasticsearch": {
+                  "hits": {
+                    "hits": [
+                      {
+                        "_id": "2188b34d716d448f9e377fb8597cbe87", 
+                        "_index": "plone2020", 
+                        "_nested": {
+                          "field": "informationtype", 
+                          "offset": 1
+                        }, 
+                        "_score": 3.8458786, 
+                        "_source": {
+                          "title": "Kurzanleitung", 
+                          "token": "kurzanleitung"
+                        }
+                      }
+                    ], 
+                    "max_score": 3.8458786, 
+                    "total": {
+                      "relation": "eq", 
+                      "value": 1
+                    }
+                  }
+                }
+              }
+            ], 
+            "doc_count_error_upper_bound": 0, 
+            "sum_other_doc_count": 0
+          }
+        }
+      }, 
+      "kompasscomponent_agg": {
+        "doc_count": 3, 
+        "inner": {
+          "doc_count": 4, 
+          "kompasscomponent_token": {
+            "buckets": [
+              {
+                "doc_count": 1, 
+                "key": "allgemeines", 
+                "somemoredatafromelasticsearch": {
+                  "hits": {
+                    "hits": [
+                      {
+                        "_id": "2188b34d716d448f9e377fb8597cbe87", 
+                        "_index": "plone2020", 
+                        "_nested": {
+                          "field": "kompasscomponent", 
+                          "offset": 0
+                        }, 
+                        "_score": 3.8458786, 
+                        "_source": {
+                          "title": "Allgemeines", 
+                          "token": "allgemeines"
+                        }
+                      }
+                    ], 
+                    "max_score": 3.8458786, 
+                    "total": {
+                      "relation": "eq", 
+                      "value": 1
+                    }
+                  }
+                }
+              }, 
+              {
+                "doc_count": 2, 
+                "key": "bew", 
+                "somemoredatafromelasticsearch": {
+                  "hits": {
+                    "hits": [
+                      {
+                        "_id": "d59278dcffb74f079498601e1d164bef", 
+                        "_index": "plone2020", 
+                        "_nested": {
+                          "field": "kompasscomponent", 
+                          "offset": 0
+                        }, 
+                        "_score": 6.2048616, 
+                        "_source": {
+                          "title": "BEW", 
+                          "token": "bew"
+                        }
+                      }
+                    ], 
+                    "max_score": 6.2048616, 
+                    "total": {
+                      "relation": "eq", 
+                      "value": 2
+                    }
+                  }
+                }
+              }, 
+              {
+                "doc_count": 1, 
+                "key": "reports-und-berichte", 
+                "somemoredatafromelasticsearch": {
+                  "hits": {
+                    "hits": [
+                      {
+                        "_id": "e5c777c9ca6e4c3ca88bb7e720a355be", 
+                        "_index": "plone2020", 
+                        "_nested": {
+                          "field": "kompasscomponent", 
+                          "offset": 0
+                        }, 
+                        "_score": 5.379884, 
+                        "_source": {
+                          "title": "Reports und Berichte", 
+                          "token": "reports-und-berichte"
+                        }
+                      }
+                    ], 
+                    "max_score": 5.379884, 
+                    "total": {
+                      "relation": "eq", 
+                      "value": 1
+                    }
+                  }
+                }
+              }
+            ], 
+            "doc_count_error_upper_bound": 0, 
+            "sum_other_doc_count": 0
+          }
+        }
+      }, 
+      "organisationunit_agg": {
+        "doc_count": 3, 
+        "inner": {
+          "doc_count": 2, 
+          "organisationunit_token": {
+            "buckets": [
+              {
+                "doc_count": 1, 
+                "key": "andere", 
+                "somemoredatafromelasticsearch": {
+                  "hits": {
+                    "hits": [
+                      {
+                        "_id": "d59278dcffb74f079498601e1d164bef", 
+                        "_index": "plone2020", 
+                        "_nested": {
+                          "field": "organisationunit", 
+                          "offset": 0
+                        }, 
+                        "_score": 6.2048616, 
+                        "_source": {
+                          "title": "Andere", 
+                          "token": "andere"
+                        }
+                      }
+                    ], 
+                    "max_score": 6.2048616, 
+                    "total": {
+                      "relation": "eq", 
+                      "value": 1
+                    }
+                  }
+                }
+              }, 
+              {
+                "doc_count": 1, 
+                "key": "gr", 
+                "somemoredatafromelasticsearch": {
+                  "hits": {
+                    "hits": [
+                      {
+                        "_id": "e5c777c9ca6e4c3ca88bb7e720a355be", 
+                        "_index": "plone2020", 
+                        "_nested": {
+                          "field": "organisationunit", 
+                          "offset": 0
+                        }, 
+                        "_score": 5.379884, 
+                        "_source": {
+                          "title": "GR", 
+                          "token": "gr"
+                        }
+                      }
+                    ], 
+                    "max_score": 5.379884, 
+                    "total": {
+                      "relation": "eq", 
+                      "value": 1
+                    }
+                  }
+                }
+              }
+            ], 
+            "doc_count_error_upper_bound": 0, 
+            "sum_other_doc_count": 0
+          }
+        }
+      }, 
+      "section_agg": {
+        "buckets": [
+          {
+            "doc_count": 3, 
+            "key": "dokumentation"
+          }
+        ], 
+        "doc_count_error_upper_bound": 0, 
+        "sum_other_doc_count": 0
+      }, 
+      "targetaudience_agg": {
+        "doc_count": 3, 
+        "inner": {
+          "doc_count": 2, 
+          "targetaudience_token": {
+            "buckets": [
+              {
+                "doc_count": 1, 
+                "key": "applikationsverantwortliche", 
+                "somemoredatafromelasticsearch": {
+                  "hits": {
+                    "hits": [
+                      {
+                        "_id": "d59278dcffb74f079498601e1d164bef", 
+                        "_index": "plone2020", 
+                        "_nested": {
+                          "field": "targetaudience", 
+                          "offset": 0
+                        }, 
+                        "_score": 6.2048616, 
+                        "_source": {
+                          "title": "Applikationsverantwortliche", 
+                          "token": "applikationsverantwortliche"
+                        }
+                      }
+                    ], 
+                    "max_score": 6.2048616, 
+                    "total": {
+                      "relation": "eq", 
+                      "value": 1
+                    }
+                  }
+                }
+              }, 
+              {
+                "doc_count": 1, 
+                "key": "superuser-innen", 
+                "somemoredatafromelasticsearch": {
+                  "hits": {
+                    "hits": [
+                      {
+                        "_id": "e5c777c9ca6e4c3ca88bb7e720a355be", 
+                        "_index": "plone2020", 
+                        "_nested": {
+                          "field": "targetaudience", 
+                          "offset": 0
+                        }, 
+                        "_score": 5.379884, 
+                        "_source": {
+                          "title": "Superuser/innen", 
+                          "token": "superuser-innen"
+                        }
+                      }
+                    ], 
+                    "max_score": 5.379884, 
+                    "total": {
+                      "relation": "eq", 
+                      "value": 1
+                    }
+                  }
+                }
+              }
+            ], 
+            "doc_count_error_upper_bound": 0, 
+            "sum_other_doc_count": 0
+          }
+        }
+      }
+    }, 
+    "hits": {
+      "hits": [
+        {
+          "_id": "d59278dcffb74f079498601e1d164bef", 
+          "_index": "plone2020", 
+          "_score": null, 
+          "_source": {
+            "@id": "http://127.0.0.1:8081/Plone/dokumentation/testseiten/kurze-testanleitung", 
+            "@type": "Manual", 
+            "UID": "d59278dcffb74f079498601e1d164bef", 
+            "allow_discussion": false, 
+            "allowedRolesAndUsers": [
+              "user:admin", 
+              "Contributor", 
+              "user:Testgruppe", 
+              "Site Administrator", 
+              "Editor", 
+              "Reader", 
+              "Manager"
+            ], 
+            "blocks_plaintext": "  Im Fr\u00fchling sind die Tage l\u00e4nger als im Winter.  ", 
+            "created": "2023-01-31T16:47:50+00:00", 
+            "creators": [
+              "admin"
+            ], 
+            "effective": "2023-01-31T19:00:16", 
+            "exclude_from_nav": false, 
+            "freemanualtags": [
+              "test"
+            ], 
+            "freemanualtags_searchable": "test", 
+            "id": "kurze-testanleitung", 
+            "informationtype": [
+              {
+                "title": "Anleitung", 
+                "token": "anleitung"
+              }
+            ], 
+            "is_folderish": true, 
+            "kompasscomponent": [
+              {
+                "title": "BEW", 
+                "token": "bew"
+              }
+            ], 
+            "language": {
+              "title": "Deutsch", 
+              "token": "de"
+            }, 
+            "layout": "view", 
+            "lock": {
+              "created": "2023-02-03T06:43:35Z", 
+              "creator": "admin", 
+              "creator_name": "admin", 
+              "creator_url": "http://127.0.0.1:8081/Plone/author/admin", 
+              "locked": true, 
+              "name": "plone.locking.stealable", 
+              "stealable": true, 
+              "time": 1675406615.06591, 
+              "timeout": 600, 
+              "token": "0.33823474683400556-0.3924297002302114-00105A989226:1675406615.066"
+            }, 
+            "manualfilecontent": "no content", 
+            "modified": "2023-02-03T06:44:03+00:00", 
+            "organisationunit": [
+              {
+                "title": "Andere", 
+                "token": "andere"
+              }
+            ], 
+            "parent": {
+              "@id": "http://127.0.0.1:8081/Plone/dokumentation/testseiten", 
+              "@type": "Folder", 
+              "description": "", 
+              "image_field": null, 
+              "image_scales": null, 
+              "review_state": "private", 
+              "title": "Testseiten"
+            }, 
+            "portal_type": "Manual", 
+            "review_state": "internal", 
+            "rid": 841449455, 
+            "section": "dokumentation", 
+            "targetaudience": [
+              {
+                "title": "Applikationsverantwortliche", 
+                "token": "applikationsverantwortliche"
+              }
+            ], 
+            "title": "Kurze Testanleitung #2"
+          }, 
+          "highlight": {
+            "title": [
+              "Kurze <em>Testanleitung</em> #2"
+            ]
+          }, 
+          "sort": [
+            1675406643000
+          ]
+        }, 
+        {
+          "_id": "2188b34d716d448f9e377fb8597cbe87", 
+          "_index": "plone2020", 
+          "_score": null, 
+          "_source": {
+            "@id": "http://127.0.0.1:8081/Plone/dokumentation/testseiten/testanleitung-katja-2022", 
+            "@type": "Manual", 
+            "UID": "2188b34d716d448f9e377fb8597cbe87", 
+            "allow_discussion": false, 
+            "allowedRolesAndUsers": [
+              "Manager", 
+              "Site Administrator", 
+              "user:admin", 
+              "Editor"
+            ], 
+            "blocks_plaintext": "Integer posuere externer Link erat a ante venenatis interner Link dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum . Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum.  Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum.  Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum.  Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum.  Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Zu beachten: Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum.  foo bar ping  Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum.  Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum.  Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum.    foo bar ping  Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum.  Style  Go to \"Listen\"   Listen  Dies ist ein Tooltip-Test mit den Begriffen QV, AHV-13.  Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum.  Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum.  Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum.  Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum.  foo bar ping  foo bar ping", 
+            "created": "2021-05-22T16:23:24+00:00", 
+            "creators": [
+              "admin"
+            ], 
+            "description": "Dies ist eine Anleitung. TODO vor Going Live l\u00f6schen", 
+            "effective": "2021-06-04T17:18:21", 
+            "exclude_from_nav": false, 
+            "freemanualtags": [
+              "test", 
+              "Lehrstellenb\u00f6rse"
+            ], 
+            "freemanualtags_searchable": "test Lehrstellenb\u00f6rse", 
+            "id": "testanleitung-katja-2022", 
+            "informationtype": [
+              {
+                "title": "Prozess-Dokumentation", 
+                "token": "4f3dcd23-81f8-4a8b-8e51-b05661785349"
+              }, 
+              {
+                "title": "Kurzanleitung", 
+                "token": "kurzanleitung"
+              }
+            ], 
+            "is_folderish": true, 
+            "kompasscomponent": [
+              {
+                "title": "Allgemeines", 
+                "token": "allgemeines"
+              }, 
+              {
+                "title": "BEW", 
+                "token": "bew"
+              }
+            ], 
+            "language": {
+              "title": "Deutsch", 
+              "token": "de"
+            }, 
+            "layout": "view", 
+            "lock": {
+              "created": "2023-02-01T07:35:16Z", 
+              "creator": "admin", 
+              "creator_name": "admin", 
+              "creator_url": "http://127.0.0.1:8081/Plone/author/admin", 
+              "locked": true, 
+              "name": "plone.locking.stealable", 
+              "stealable": true, 
+              "time": 1675236916.450326, 
+              "timeout": 600, 
+              "token": "0.20594314479910603-0.9530586779105573-00105A989226:1675236916.450"
+            }, 
+            "manualfilecontent": "no content", 
+            "modified": "2023-02-01T07:35:24+00:00", 
+            "parent": {
+              "@id": "http://127.0.0.1:8081/Plone/dokumentation/testseiten", 
+              "@type": "Folder", 
+              "description": "", 
+              "image_field": null, 
+              "image_scales": null, 
+              "review_state": "private", 
+              "title": "Testseiten"
+            }, 
+            "portal_type": "Manual", 
+            "review_state": "private", 
+            "rid": 841449434, 
+            "section": "dokumentation", 
+            "subjects": [
+              "test"
+            ], 
+            "title": "Testanleitung zum Testen und so weiter. #1"
+          }, 
+          "highlight": {
+            "title": [
+              "<em>Testanleitung</em> zum Testen und so weiter. #1"
+            ]
+          }, 
+          "sort": [
+            1675236924000
+          ]
+        }, 
+        {
+          "_id": "e5c777c9ca6e4c3ca88bb7e720a355be", 
+          "_index": "plone2020", 
+          "_score": null, 
+          "_source": {
+            "@id": "http://127.0.0.1:8081/Plone/dokumentation/testseiten/testanleitung-nur-fuer-gruppe", 
+            "@type": "Manual", 
+            "UID": "e5c777c9ca6e4c3ca88bb7e720a355be", 
+            "allow_discussion": false, 
+            "allowedRolesAndUsers": [
+              "user:Testgruppe2", 
+              "user:admin", 
+              "Contributor", 
+              "user:Testgruppe", 
+              "Site Administrator", 
+              "Editor", 
+              "Reader", 
+              "user:87b7444d8f4a4e82822558d1b3cb6375", 
+              "Manager"
+            ], 
+            "blocks_plaintext": "Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Vestibulum id ligula porta felis euismod semper. Nullam id dolor id nibh ultricies vehicula ut id elit. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Maecenas faucibus mollis interdum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.", 
+            "created": "2021-06-04T06:07:51+00:00", 
+            "creators": [
+              "87b7444d8f4a4e82822558d1b3cb6375"
+            ], 
+            "effective": "2021-08-23T05:54:13", 
+            "exclude_from_nav": false, 
+            "freemanualtags": [
+              "test"
+            ], 
+            "freemanualtags_searchable": "test", 
+            "id": "testanleitung-nur-fuer-gruppe", 
+            "informationtype": [
+              {
+                "title": "FAQ", 
+                "token": "faq"
+              }
+            ], 
+            "is_folderish": true, 
+            "kompasscomponent": [
+              {
+                "title": "Reports und Berichte", 
+                "token": "reports-und-berichte"
+              }
+            ], 
+            "language": {
+              "title": "Deutsch", 
+              "token": "de"
+            }, 
+            "layout": "view", 
+            "lock": {
+              "locked": false, 
+              "stealable": true
+            }, 
+            "manualfilecontent": "no content", 
+            "modified": "2022-08-08T04:08:05+00:00", 
+            "organisationunit": [
+              {
+                "title": "GR", 
+                "token": "gr"
+              }
+            ], 
+            "parent": {
+              "@id": "http://127.0.0.1:8081/Plone/dokumentation/testseiten", 
+              "@type": "Folder", 
+              "description": "", 
+              "image_field": null, 
+              "image_scales": null, 
+              "review_state": "private", 
+              "title": "Testseiten"
+            }, 
+            "portal_type": "Manual", 
+            "review_state": "internal", 
+            "rid": 841449440, 
+            "section": "dokumentation", 
+            "targetaudience": [
+              {
+                "title": "Superuser/innen", 
+                "token": "superuser-innen"
+              }
+            ], 
+            "title": "Testanleitung nur f\u00fcr Gruppe"
+          }, 
+          "highlight": {
+            "title": [
+              "<em>Testanleitung</em> nur f\u00fcr Gruppe"
+            ]
+          }, 
+          "sort": [
+            1659931685000
+          ]
+        }
+      ], 
+      "max_score": null, 
+      "total": {
+        "relation": "eq", 
+        "value": 3
+      }
+    }, 
+    "timed_out": false, 
+    "took": 65
+  }

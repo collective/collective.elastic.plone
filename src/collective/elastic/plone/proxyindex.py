@@ -165,6 +165,7 @@ class ElasticSearchProxyIndex(SimpleItem):
         records.  The second object is a tuple containing the names of
         all data fields used.
         """
+        logger.info(f"*** _apply_index {self.id}")
         record = IndexQuery(request, self.id)
         if record.keys is None:
             return None
@@ -177,7 +178,7 @@ class ElasticSearchProxyIndex(SimpleItem):
         template_params = {"keys": keys}
         __traceback_info__ = "template parameters: {0}".format(template_params)
         query_body = self._apply_template(template_params)
-        logger.info(query_body)
+        logger.info("query_body", query_body)
         es_kwargs = dict(
             index=index_name(),
             body=query_body,
@@ -188,6 +189,8 @@ class ElasticSearchProxyIndex(SimpleItem):
         es = get_query_client()
         try:
             result = es.search(**es_kwargs)
+            logger.info("** Response ElasticSearch ")
+            logger.info(result)
         except RequestError:
             logger.info("Query failed:\n{0}".format(query_body))
             return None
@@ -200,8 +203,8 @@ class ElasticSearchProxyIndex(SimpleItem):
             return int(10000 * float(record["_score"]))
 
         retval = IIBTree()
-        for r in result["hits"]["hits"]:
-            retval[r["_source"]["rid"]] = score(r)
+        for record in result["hits"]["hits"]:
+            retval[record["_source"]["rid"]] = score(record)
 
         total = result["hits"]["total"]["value"]
         if total > BATCH_SIZE:
