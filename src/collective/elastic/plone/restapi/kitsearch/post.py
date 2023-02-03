@@ -58,14 +58,15 @@ class Kitsearch(Service):
         es = get_query_client(elasticsearch_url)
         try:
             result = es.search(**es_kwargs)
-        except RequestError:
-            logger.info("Query failed:\n{0}".format(query_body))
-            return None
-        except TransportError:
-            logger.exception("ElasticSearch failed")
-            return None
+        except RequestError as e:
+            logger.exception(f"Query failed: {str(e)}")
+            logger.exception(pprint(query_body))
+            return None, str(e)
+        except TransportError as e:
+            logger.exception(f"ElasticSearch failed {str(e)}")
+            return None, str(e)
         # result is of type ObjectApiResponse
-        return dict(result)
+        return dict(result), ""
 
     def has_permission_to_query_all(self):
         sm = getSecurityManager()
@@ -102,10 +103,30 @@ class Kitsearch(Service):
                 {"terms": {"allowedRolesAndUsers.keyword": arau}}
             )
         # Enrich query with aggregation info on sections
+        # And apply filter to aggregation per section
         if not esquery["elasticsearch_payload"].get("aggs"):
             esquery["elasticsearch_payload"]["aggs"] = {}
+        post_filter_filter = (
+            esquery["elasticsearch_payload"]
+            .get("post_filter", {})
+            .get("bool", {})
+            .get("filter", [])
+        )
         esquery["elasticsearch_payload"]["aggs"]["section_agg"] = {
-            "terms": {"field": "section.keyword"}
+            "aggs": {
+                "section_foodidoo": {"terms": {"field": "section.keyword", "size": 500}}
+            },
+            # With filter it's not easy as
+            # "terms": {"field": "section.keyword"},
+            "filter": {
+                "bool": {
+                    "filter": len(post_filter_filter) > 0
+                    and esquery["elasticsearch_payload"]["post_filter"]["bool"][
+                        "filter"
+                    ]
+                    or []
+                }
+            },
         }
         return esquery
 
@@ -116,4 +137,10 @@ class Kitsearch(Service):
             return {}
 
         elasticsearchresponse = self.search(self.esQuery(data))
-        return elasticsearchresponse
+        if elasticsearchresponse[0]:
+            return elasticsearchresponse[0]
+        else:
+            self.request.response.setStatus(400)
+            return dict(
+                error=dict(type="Bad Request", message=elasticsearchresponse[1])
+            )
