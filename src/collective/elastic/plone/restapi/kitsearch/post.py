@@ -7,8 +7,6 @@ from plone.restapi.deserializer import json_body
 from plone.restapi.services import Service
 from Products.CMFCore.utils import getToolByName
 from pprint import pprint
-from zope.interface import implementer
-from zope.publisher.interfaces import IPublishTraverse
 
 import json
 import requests
@@ -26,18 +24,19 @@ class Kitsearch(Service):
     """
 
     def searchSimple(self, data):
-        """Simple fetch with Python requests module.
-
-        OBSOLETE
-        """
+        """Simple fetch with Python requests module."""
 
         elasticsearch_url = data.get("elasticsearch_url", "http://localhost:9200")
         elasticsearch_index = data.get("elasticsearch_index", "plone")
         resp = requests.post(
             f"{elasticsearch_url}/{elasticsearch_index}/_search",
-            headers={"Accept": "application/json", "Content-Type": "application/json"},
+            headers={
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
             json=data.get("elasticsearch_payload", {}),
         )
+        resp.raise_for_status()
         return json.loads(resp.text)
 
     def search(self, data):
@@ -142,11 +141,5 @@ class Kitsearch(Service):
         if not data:
             return {}
 
-        elasticsearchresponse = self.search(self.esQuery(data))
-        if elasticsearchresponse[0]:
-            return elasticsearchresponse[0]
-        else:
-            self.request.response.setStatus(400)
-            return dict(
-                error=dict(type="Bad Request", message=elasticsearchresponse[1])
-            )
+        elasticsearchresponse = self.searchSimple(self.esQuery(data))
+        return elasticsearchresponse
