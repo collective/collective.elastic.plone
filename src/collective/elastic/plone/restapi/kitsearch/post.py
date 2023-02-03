@@ -112,6 +112,15 @@ class Kitsearch(Service):
             .get("bool", {})
             .get("filter", [])
         )
+        post_filter_must = (
+            esquery["elasticsearch_payload"]
+            .get("post_filter", {})
+            .get("bool", {})
+            .get("must", [])
+        )
+        post_filter_must_without_section = [
+            flt for flt in post_filter_must if not "section" in flt["terms"].keys()
+        ]
         esquery["elasticsearch_payload"]["aggs"]["section_agg"] = {
             "aggs": {
                 "section_foodidoo": {"terms": {"field": "section.keyword", "size": 500}}
@@ -120,11 +129,8 @@ class Kitsearch(Service):
             # "terms": {"field": "section.keyword"},
             "filter": {
                 "bool": {
-                    "filter": len(post_filter_filter) > 0
-                    and esquery["elasticsearch_payload"]["post_filter"]["bool"][
-                        "filter"
-                    ]
-                    or []
+                    "filter": post_filter_filter,
+                    "must": post_filter_must_without_section,
                 }
             },
         }
