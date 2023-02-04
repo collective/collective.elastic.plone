@@ -36,7 +36,6 @@ class Kitsearch(Service):
             },
             json=data.get("elasticsearch_payload", {}),
         )
-        resp.raise_for_status()
         return json.loads(resp.text)
 
     def search(self, data):
@@ -72,9 +71,10 @@ class Kitsearch(Service):
         return sm.checkPermission("Manage portal", self.context)
 
     def esQuery(self, data):
-        """Extend query with roles, user and groups"""
+        """Extend query with roles, user and groups."""
         esquery = data
         if self.has_permission_to_query_all():
+            # Query without allowedRolesAndUsers
             pass
         else:
             mtool = getToolByName(self.context, "portal_membership")
@@ -91,18 +91,46 @@ class Kitsearch(Service):
                     arau.append(f"user:{grp.id}")
                 arau.append("Anonymous")
 
-            # Enrich original query with "allowedRolesAndUsers"
+            # Enrich original query post_filter with "allowedRolesAndUsers".
             if not esquery["elasticsearch_payload"].get("post_filter"):
-                esquery["elasticsearch_payload"] = {"bool": {"must": []}}
-            if not esquery["elasticsearch_payload"]["post_filter"].get("bool"):
                 esquery["elasticsearch_payload"]["post_filter"] = {"bool": {"must": []}}
-            if not esquery["elasticsearch_payload"]["post_filter"]["bool"].get("must"):
+            if not esquery["elasticsearch_payload"]["post_filter"].get("bool"):
                 esquery["elasticsearch_payload"]["post_filter"]["bool"] = {"must": []}
+            if not esquery["elasticsearch_payload"]["post_filter"]["bool"].get("must"):
+                esquery["elasticsearch_payload"]["post_filter"]["bool"]["must"] = []
             esquery["elasticsearch_payload"]["post_filter"]["bool"]["must"].append(
                 {"terms": {"allowedRolesAndUsers.keyword": arau}}
             )
-        # Enrich query with aggregation info on sections
-        # And apply filter to aggregation per section
+
+            # Enrich aggs filter with "allowedRolesAndUsers".
+            for agg in esquery["elasticsearch_payload"]["aggs"].keys():
+                # esquery["elasticsearch_payload"]["aggs"][agg]["filter"]["bool"]["must"]
+                if not esquery["elasticsearch_payload"]["aggs"][agg].get("filter"):
+                    esquery["elasticsearch_payload"]["aggs"][agg]["filter"] = {
+                        "bool": {"must": []}
+                    }
+                if not esquery["elasticsearch_payload"]["aggs"][agg]["filter"].get(
+                    "bool"
+                ):
+                    esquery["elasticsearch_payload"]["aggs"][agg]["filter"]["bool"] = {
+                        "must": []
+                    }
+                if not esquery["elasticsearch_payload"]["aggs"][agg]["filter"][
+                    "bool"
+                ].get("must"):
+                    esquery["elasticsearch_payload"]["aggs"][agg]["filter"]["bool"][
+                        "must"
+                    ] = []
+
+                esquery["elasticsearch_payload"]["aggs"][agg]["filter"]["bool"][
+                    "must"
+                ].append({"terms": {"allowedRolesAndUsers.keyword": arau}})
+
+        """Sections
+        
+        Enrich query with aggregation info on sections
+        and apply filter to aggregation per section.
+        """
         if not esquery["elasticsearch_payload"].get("aggs"):
             esquery["elasticsearch_payload"]["aggs"] = {}
         post_filter_filter = (
@@ -124,7 +152,7 @@ class Kitsearch(Service):
             "aggs": {
                 "section_foodidoo": {"terms": {"field": "section.keyword", "size": 500}}
             },
-            # With filter it's not easy as
+            # With filter it's not as easy as
             # "terms": {"field": "section.keyword"},
             "filter": {
                 "bool": {
@@ -133,6 +161,7 @@ class Kitsearch(Service):
                 }
             },
         }
+
         return esquery
 
     def reply(self):
