@@ -29,3 +29,25 @@ class TimestampExpansion(object):
             return {}
         ts = annotations.get("ELASTIC_LAST_INDEXING_QUEUED_TIMESTAMP", 0)
         return {"last_indexing_queued": ts}
+
+
+@implementer(IExpandableElement)
+class AllowedRolesAndUsersExpansion(object):
+    """Extend response by allowedRolesAndUsers.
+
+    TODO Replace ExpandableElement with extension of default SerializeToJSON serializer.
+    """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self, expand=False):
+        catalog = api.portal.get_tool("portal_catalog")
+        path = "/".join(self.context.getPhysicalPath())
+        rid = catalog.getrid(path)
+        index = catalog._catalog.getIndex("allowedRolesAndUsers")
+
+        return {
+            "component_allowedRolesAndUsers": index.getEntryForObject(rid, default=[])
+        }

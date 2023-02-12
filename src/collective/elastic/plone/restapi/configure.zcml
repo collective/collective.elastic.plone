@@ -6,6 +6,8 @@
 
   <include package="plone.rest" file="meta.zcml" />
 
+  <include package=".kitsearch" />
+
   <plone:service
       accept="application/json"
       factory=".schema.SchemaService"
@@ -25,6 +27,12 @@
     name="last_indexing_queued_timestamp"
     for="plone.dexterity.interfaces.IDexterityContent *"
     factory=".expansions.TimestampExpansion"
+  />
+
+  <adapter
+    name="allowedRolesAndUsersExpansion"
+    for="plone.dexterity.interfaces.IDexterityContent *"
+    factory=".expansions.AllowedRolesAndUsersExpansion"
   />
 
 </configure>

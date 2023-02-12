@@ -1,0 +1,234 @@
+{
+    "elasticsearch_payload": {
+        "query": {
+            "bool": {
+                "should": [
+                    {
+                        "query_string": {
+                            "query": "\"Testanleitung\"",
+                            "fields": [
+                                "title.exact^1.4",
+                                "subjects.exact^1.4",
+                                "freemanualtags_searchable.exact^1.4",
+                                "blocks_plaintext.exact",
+                                "manualfilecontent.exact",
+                                "description.exact^1.2"
+                            ]
+                        }
+                    }
+                ],
+                "must": [],
+                "must_not": []
+            }
+        },
+        "highlight": {
+            "number_of_fragments": 20,
+            "fields": [
+                {
+                    "title": {
+                        "matched_fields": [
+                            "title",
+                            "title.exact"
+                        ],
+                        "type": "fvh"
+                    }
+                },
+                {
+                    "description": {
+                        "matched_fields": [
+                            "description",
+                            "description.exact"
+                        ],
+                        "type": "fvh"
+                    }
+                },
+                {
+                    "blocks_plaintext": {
+                        "matched_fields": [
+                            "blocks_plaintext",
+                            "blocks_plaintext.exact"
+                        ],
+                        "type": "fvh"
+                    }
+                }
+            ]
+        },
+        "sort": [
+            {
+                "modified": "desc"
+            }
+        ],
+        "size": 10,
+        "from": 0,
+        "post_filter": {
+            "bool": {
+                "must": [
+                    {
+                        "terms": {
+                            "portal_type": [
+                                "Manual",
+                                "News Item",
+                                "Document",
+                                "Event"
+                            ]
+                        }
+                    },
+                    {
+                        "terms": {
+                            "review_state": [
+                                "internally_published",
+                                "private",
+                                "internal",
+                                "published"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "aggs": {
+            "kompasscomponent_agg": {
+                "aggs": {
+                    "inner": {
+                        "nested": {
+                            "path": "kompasscomponent"
+                        },
+                        "aggs": {
+                            "kompasscomponent_token": {
+                                "terms": {
+                                    "field": "kompasscomponent.token",
+                                    "order": {
+                                        "_key": "asc"
+                                    },
+                                    "size": 30
+                                },
+                                "aggs": {
+                                    "somemoredatafromelasticsearch": {
+                                        "top_hits": {
+                                            "size": 1,
+                                            "_source": {
+                                                "includes": [
+                                                    "kompasscomponent"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "filter": {
+                    "match_all": {}
+                }
+            },
+            "informationtype_agg": {
+                "aggs": {
+                    "inner": {
+                        "nested": {
+                            "path": "informationtype"
+                        },
+                        "aggs": {
+                            "informationtype_token": {
+                                "terms": {
+                                    "field": "informationtype.token",
+                                    "order": {
+                                        "_key": "asc"
+                                    },
+                                    "size": 30
+                                },
+                                "aggs": {
+                                    "somemoredatafromelasticsearch": {
+                                        "top_hits": {
+                                            "size": 1,
+                                            "_source": {
+                                                "includes": [
+                                                    "informationtype"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "filter": {
+                    "match_all": {}
+                }
+            },
+            "targetaudience_agg": {
+                "aggs": {
+                    "inner": {
+                        "nested": {
+                            "path": "targetaudience"
+                        },
+                        "aggs": {
+                            "targetaudience_token": {
+                                "terms": {
+                                    "field": "targetaudience.token",
+                                    "order": {
+                                        "_key": "asc"
+                                    },
+                                    "size": 30
+                                },
+                                "aggs": {
+                                    "somemoredatafromelasticsearch": {
+                                        "top_hits": {
+                                            "size": 1,
+                                            "_source": {
+                                                "includes": [
+                                                    "targetaudience"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "filter": {
+                    "match_all": {}
+                }
+            },
+            "organisationunit_agg": {
+                "aggs": {
+                    "inner": {
+                        "nested": {
+                            "path": "organisationunit"
+                        },
+                        "aggs": {
+                            "organisationunit_token": {
+                                "terms": {
+                                    "field": "organisationunit.token",
+                                    "order": {
+                                        "_key": "asc"
+                                    },
+                                    "size": 30
+                                },
+                                "aggs": {
+                                    "somemoredatafromelasticsearch": {
+                                        "top_hits": {
+                                            "size": 1,
+                                            "_source": {
+                                                "includes": [
+                                                    "organisationunit"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "filter": {
+                    "match_all": {}
+                }
+            }
+        }
+    },
+    "elasticsearch_url": "http://localhost:9200",
+    "elasticsearch_index": "plone2020"
+}

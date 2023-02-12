@@ -43,6 +43,7 @@
       />
 
   <!-- -*- extra stuff goes here -*- -->
+
   <adapter
       factory=".proxyindex.IndexNodeAdapter"
   />

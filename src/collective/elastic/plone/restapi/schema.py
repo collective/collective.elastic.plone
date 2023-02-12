@@ -15,8 +15,7 @@ def dottedname(obj):
 
 
 def _field(field, name=None):
-    """serialize a single field definition for ES
-    """
+    """Serialize a single field definition for ElasticSearch."""
     record = {"field": dottedname(field)}
     if name:
         record["name"] = name

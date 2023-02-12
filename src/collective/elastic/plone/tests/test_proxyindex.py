@@ -61,7 +61,7 @@ class TestESProxyIndexBasics(unittest.TestCase):
     def test_template(self):
         idx = self.catalog._catalog.indexes["espi"]
         result = idx._apply_template({"bar": "baz"})
-        self.assertEqual(result["foo"], u"baz")
+        self.assertEqual(result["foo"], "baz")
 
 
 class TestESProxyIndexAllQuery(unittest.TestCase):
