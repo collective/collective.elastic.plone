@@ -128,39 +128,11 @@ class Kitsearch(Service):
 
         """Sections
         
-        Enrich query with aggregation info on sections
+        Enrich esquery with aggregation info on sections
         and apply filter to aggregation per section.
         """
         if not esquery["elasticsearch_payload"].get("aggs"):
             esquery["elasticsearch_payload"]["aggs"] = {}
-        post_filter_filter = (
-            esquery["elasticsearch_payload"]
-            .get("post_filter", {})
-            .get("bool", {})
-            .get("filter", [])
-        )
-        post_filter_must = (
-            esquery["elasticsearch_payload"]
-            .get("post_filter", {})
-            .get("bool", {})
-            .get("must", [])
-        )
-        post_filter_must_without_section = [
-            flt for flt in post_filter_must if not "section" in flt["terms"].keys()
-        ]
-        esquery["elasticsearch_payload"]["aggs"]["section_agg"] = {
-            "aggs": {
-                "section_foodidoo": {"terms": {"field": "section.keyword", "size": 500}}
-            },
-            # With filter it's not as easy as
-            # "terms": {"field": "section.keyword"},
-            "filter": {
-                "bool": {
-                    "filter": post_filter_filter,
-                    "must": post_filter_must_without_section,
-                }
-            },
-        }
 
         return esquery
 
