@@ -3,6 +3,7 @@ from collective.elastic.ingest.celery import index
 from collective.elastic.ingest.celery import unindex
 from collective.elastic.plone.eslib import index_name
 from collective.elastic.plone.interfaces import IElasticSearchIndexQueueProcessor
+from kombu.exceptions import OperationalError
 from plone import api
 from plone.dexterity.interfaces import IDexterityContent
 from zope.annotation import IAnnotations
@@ -29,7 +30,12 @@ class ElasticSearchIndexQueueProcessor(object):
         index.delay("/".join(obj.getPhysicalPath()), ts, index_name())
 
     def reindex(self, obj, attributes=None, update_metadata=1):
-        self.index(obj, attributes)
+        try:
+            self.index(obj, attributes)
+        except OperationalError as e:
+            logger.exception(
+                f"ElasticSearchIndexQueueProcessor. Reindexing failed: {str(e)}. Check ElasticSearch configuration."
+            )
 
     def unindex(self, obj):
         uid = api.content.get_uuid(obj)
