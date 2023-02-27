@@ -21,7 +21,7 @@ mxdev
 *****
 
 Add `collective.elastic.plone` to your `requirements.txt`.
-Provide an environments variable file `.env` in your backend directory with
+Provide an environments variable file `.env` in your backend directory with::
 
     export CELERY_BROKER=redis://localhost:6379/0
     export ELASTICSEARCH_INDEX={{elasticsearchindex}}
