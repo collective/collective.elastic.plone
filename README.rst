@@ -17,8 +17,7 @@ ElasticSearch Integration for Plone content
 Installation
 ------------
 
-mxdev
-*****
+**mxdev**
 
 Add `collective.elastic.plone` to your `requirements.txt`.
 Provide an environments variable file `.env` in your backend directory with::
@@ -28,8 +27,7 @@ Provide an environments variable file `.env` in your backend directory with::
     export ELASTICSEARCH_QUERY_SERVER={{elasticsearch_address}}
 
 
-buildout
-********
+**buildout**
 
 Install `collective.elastic.plone` by adding it to your buildout::
 
