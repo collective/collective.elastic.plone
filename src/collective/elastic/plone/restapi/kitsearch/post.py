@@ -1,5 +1,6 @@
 from AccessControl import getSecurityManager
 from collective.elastic.plone.eslib import get_query_client
+from elasticsearch.exceptions import NotFoundError
 from elasticsearch.exceptions import RequestError
 from elasticsearch.exceptions import TransportError
 from plone import api
@@ -57,14 +58,20 @@ class Kitsearch(Service):
         try:
             result = es.search(**es_kwargs)
         except RequestError as e:
-            logger.exception(f"Query failed: {str(e)}")
-            logger.exception(pprint(query_body))
-            return None, str(e)
+            self.request.response.setStatus(500)
+            return dict(error=dict(message=e.message))
         except TransportError as e:
-            logger.exception(f"ElasticSearch failed {str(e)}")
-            return None, str(e)
+            self.request.response.setStatus(503)
+            return dict(error=dict(message=e.message))
+        except NotFoundError as e:
+            self.request.response.setStatus(404)
+            return dict(error=dict(message=e.body['error']['reason']))
+        except Exception as e:
+            self.request.response.setStatus(500)
+            return dict(error=dict(message=e.message))
         # result is of type ObjectApiResponse
-        return dict(result), ""
+        return dict(result)
+    
 
     def has_permission_to_query_all(self):
         sm = getSecurityManager()
@@ -134,5 +141,5 @@ class Kitsearch(Service):
         if not data:
             return {}
 
-        elasticsearchresponse = self.searchSimple(self.esQuery(data))
+        elasticsearchresponse = self.search(self.esQuery(data))
         return elasticsearchresponse
