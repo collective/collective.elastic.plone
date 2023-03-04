@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-1.2 (unreleased)
-----------------
+1.1.2 (2023-03-04)
+------------------
 
 -  Enhance response of @kitsearch on unavailable ElasticSearch or not found index [ksuess]
 
