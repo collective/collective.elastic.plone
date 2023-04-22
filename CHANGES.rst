@@ -5,7 +5,7 @@ Changelog
 1.1.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Step back from ElasticSearch scroll API for deep pagination.
 
 
 1.1.2 (2023-03-04)
