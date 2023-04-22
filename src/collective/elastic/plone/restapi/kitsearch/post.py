@@ -49,7 +49,6 @@ class Kitsearch(Service):
         es_kwargs = dict(
             index=elasticsearch_index,
             body=query_body,
-            scroll="1m",
             # _source_includes=["rid"],
         )
         if not query_body.get("size", None):
@@ -65,13 +64,12 @@ class Kitsearch(Service):
             return dict(error=dict(message=e.message))
         except NotFoundError as e:
             self.request.response.setStatus(404)
-            return dict(error=dict(message=e.body['error']['reason']))
+            return dict(error=dict(message=e.body["error"]["reason"]))
         except Exception as e:
             self.request.response.setStatus(500)
             return dict(error=dict(message=e.message))
         # result is of type ObjectApiResponse
         return dict(result)
-    
 
     def has_permission_to_query_all(self):
         sm = getSecurityManager()
