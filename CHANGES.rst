@@ -5,7 +5,7 @@ Changelog
 1.1.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Refactor to one single IExpandableElement adapter. @ksuess
 
 
 1.1.3 (2023-04-22)

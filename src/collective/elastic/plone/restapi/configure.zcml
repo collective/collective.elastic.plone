@@ -18,21 +18,10 @@
   />
 
   <adapter
-    name="catalog_rid"
+    name="collectiveelastic"
     for="plone.dexterity.interfaces.IDexterityContent *"
-    factory=".expansions.RidExpansion"
+    factory=".expansions.CollectiveElastic"
   />
 
-  <adapter
-    name="last_indexing_queued_timestamp"
-    for="plone.dexterity.interfaces.IDexterityContent *"
-    factory=".expansions.TimestampExpansion"
-  />
-
-  <adapter
-    name="allowedRolesAndUsersExpansion"
-    for="plone.dexterity.interfaces.IDexterityContent *"
-    factory=".expansions.AllowedRolesAndUsersExpansion"
-  />
 
 </configure>
