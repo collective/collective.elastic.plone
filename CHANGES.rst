@@ -6,6 +6,7 @@ Changelog
 ------------------
 
 - Refactor to one single IExpandableElement adapter. @ksuess
+- Add IBlockSearchableText adapter for accordion block. @ksuess
 
 
 1.1.3 (2023-04-22)

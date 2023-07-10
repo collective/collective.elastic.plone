@@ -23,5 +23,6 @@
     factory=".expansions.CollectiveElastic"
   />
 
+  <adapter name="accordion" factory=".blocks.AccordionBlockSearchableText" />
 
 </configure>
