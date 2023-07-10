@@ -24,3 +24,24 @@ class AccordionBlockSearchableText(object):
             subblock_result = extract_text(subblock, self.context, self.request)
             result = f"{result} {subblock_result}"
         return result
+
+
+@implementer(IBlockSearchableText)
+@adapter(IBlocks, IBrowserRequest)
+class TeaserBlockSearchableText(object):
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self, block_value):
+        result = ""
+        if 'head_title' in block_value:
+            if block_value['head_title']:
+                result = f"{result}\n{block_value['head_title']}"
+        if 'title' in block_value:
+            if block_value['title']:
+                result = f"{result}\n{block_value['title']}"
+        if 'description' in block_value:
+            if block_value['description']:
+                result = f"{result}\n{block_value['description']}"
+        return result

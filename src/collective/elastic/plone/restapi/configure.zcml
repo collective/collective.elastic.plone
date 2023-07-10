@@ -24,5 +24,6 @@
   />
 
   <adapter name="accordion" factory=".blocks.AccordionBlockSearchableText" />
+  <adapter name="teaser" factory=".blocks.TeaserBlockSearchableText" />
 
 </configure>
