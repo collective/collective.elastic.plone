@@ -29,7 +29,11 @@ class CollectiveElastic(object):
         return " ".join([text.strip() for text in blocks_text if text.strip()])
 
     def __call__(self, expand=False):
-        result = {"collectiveelastic": {"@id": f"{self.context.absolute_url()}/@collectiveelastic"}}
+        result = {
+            "collectiveelastic": {
+                "@id": f"{self.context.absolute_url()}/@collectiveelastic"
+                }
+            }
         if not expand:
             return result
 
@@ -54,7 +58,8 @@ class CollectiveElastic(object):
             {
                 "catalog_rid": rid,
                 "last_indexing_queued": ts,
-                "allowedRolesAndUsers": index.getEntryForObject(rid, default=[]),
+                "allowedRolesAndUsers":
+                    index.getEntryForObject(rid, default=[]),
                 "blocks_plaintext": blocks_plaintext
             }
         )
