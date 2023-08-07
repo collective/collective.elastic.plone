@@ -6,6 +6,7 @@ from zope.component import adapter
 from zope.interface import implementer
 from zope.publisher.interfaces.browser import IBrowserRequest
 
+
 @implementer(IBlockSearchableText)
 @adapter(IBlocks, IBrowserRequest)
 class AccordionBlockSearchableText(object):
@@ -21,7 +22,8 @@ class AccordionBlockSearchableText(object):
                 if not isinstance(subblock_title, str):
                     subblock_title = str(subblock_title)
                 result = f"{result}\n{subblock_title}"
-            subblock_result = extract_text(subblock, self.context, self.request)
+            subblock_result = \
+                extract_text(subblock, self.context, self.request)
             result = f"{result} {subblock_result}"
         return result
 
