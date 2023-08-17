@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.4 (unreleased)
+1.1.4 (2023-08-17)
 ------------------
 
 - Get elastic client getter from collective.elastic.ingest. [ksuess]
