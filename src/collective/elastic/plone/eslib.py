@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-from collective.elastic.ingest import ELASTICSEARCH_7
-from elasticsearch import Elasticsearch
+from collective.elastic.ingest.elastic import get_ingest_client
 
 import logging
 import os
@@ -11,21 +10,8 @@ logger = logging.getLogger(__name__)
 
 def get_query_client(elasticsearch_server_baseurl=None):
     """return elasticsearch client for ingest"""
-    raw_addr = elasticsearch_server_baseurl or os.environ.get(
-        "ELASTICSEARCH_QUERY_SERVER", "http://localhost:9200"
-    )
-    use_ssl = os.environ.get("ELASTICSEARCH_QUERY_USE_SSL", "0")
-    use_ssl = bool(int(use_ssl))
-    addresses = [x for x in raw_addr.split(",") if x.strip()]
-    if not addresses:
-        addresses.append("127.0.0.1:9200")
-    if ELASTICSEARCH_7:
-        return Elasticsearch(
-            addresses,
-            use_ssl=use_ssl,
-            # here some more params need to be configured.
-        )
-    return Elasticsearch(addresses)
+    return get_ingest_client(
+        elasticsearch_server_baseurl=elasticsearch_server_baseurl)
 
 
 def index_name():
