@@ -10,7 +10,7 @@ ElasticSearch Integration for Plone content
 
 - indexer passing content to a separate running `collective.elastic.ingest <https://github.com/collective/collective.elastic.ingest>`_ service.
 - index acting as a proxy to ElasticSearch, integrates with ZCatalog
-- custom plugins for `plone.restapi` to provide structural information for the ingestions service
+- custom plugins for ``plone.restapi`` to provide structural information for the ingestion service
 - REST api endpoint @kitsearch accepting Elasticsearch query returning results with Plone permission check.
 
 
@@ -19,11 +19,11 @@ Installation
 
 **mxdev**
 
-Add `collective.elastic.plone` to your `requirements.txt`.
+Add ``collective.elastic.plone``` to your ``requirements.txt``.
 Provide an environments variable file `.env` in your backend directory with::
 
     export CELERY_BROKER=redis://localhost:6379/0
-    export ELASTICSEARCH_INDEX={{elasticsearchindex}}
+    export ELASTICSEARCH_INDEX=plone
     export ELASTICSEARCH_QUERY_SERVER={{elasticsearch_address}}
 
 
@@ -59,20 +59,18 @@ There you can report issue too.
 We'd be happy to see many forks and pull-requests to make this addon even better.
 
 Maintainers are `Jens Klein <mailto:jk@kleinundpartner.at>`_, `Peter Holzer <mailto:peter.holzer@agitator.com>`_ and the BlueDynamics Alliance developer team.
-We appreciate any contribution and if a release is needed to be done on pypi, please just contact one of us.
+We appreciate any contribution and if a release is needed to be done on PyPI, please just contact one of us.
 We also offer commercial support if any training, coaching, integration or adaptions are needed.
 
 
 Contributions
 -------------
 
-Initial implementation was made possible by `Evangelisch-reformierte Landeskirche des Kantons Zürich <http://zhref.ch/>`_.
-
 Idea and testing: Peter Holzer
 
-Concept & code by Jens W. Klein
+Initial concept & code by Jens W. Klein
 
-Authors:
+Contributors:
 
 - Katja Süss (Github: @ksuess)
 
