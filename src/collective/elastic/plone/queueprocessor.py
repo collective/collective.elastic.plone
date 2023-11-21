@@ -35,6 +35,8 @@ class ElasticSearchIndexQueueProcessor(object):
         index.delay("/".join(obj.getPhysicalPath()), ts, index_name())
 
     def reindex(self, obj, attributes=None, update_metadata=1):
+        if not self._active():
+            return
         try:
             self.index(obj, attributes)
         except OperationalError as e:
@@ -43,6 +45,8 @@ class ElasticSearchIndexQueueProcessor(object):
             )
 
     def unindex(self, obj):
+        if not self._active():
+            return
         uid = api.content.get_uuid(obj)
         unindex.delay(uid, index_name())
 
