@@ -8,6 +8,8 @@ Changelog
 - Do not expect Volto to be installed/available.
   Works now in plain Classic UI again. [jensens]
 
+- Fix: Do not index if indexer is not installed. [jensens]
+
 
 1.1.4 (2023-08-17)
 ------------------

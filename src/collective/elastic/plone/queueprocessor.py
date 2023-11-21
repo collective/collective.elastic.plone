@@ -8,6 +8,7 @@ from plone import api
 from plone.dexterity.interfaces import IDexterityContent
 from zope.annotation import IAnnotations
 from zope.interface import implementer
+from Products.GenericSetup.tool import UNKNOWN
 
 import logging
 import time
@@ -20,8 +21,12 @@ logger = logging.getLogger("collective.elastic.index")
 class ElasticSearchIndexQueueProcessor(object):
     """a queue processor for ElasticSearch"""
 
+    def _active(self):
+        portal_setup = api.portal.get_tool("portal_setup")
+        return portal_setup.getLastVersionForProfile("collective-elastic-plone") != UNKNOWN
+
     def index(self, obj, attributes=None):
-        if not IDexterityContent.providedBy(obj):
+        if not self._active() or not IDexterityContent.providedBy(obj):
             return
         # get transaction id
         ts = time.time()
