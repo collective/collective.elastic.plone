@@ -11,7 +11,7 @@ ElasticSearch Integration for Plone content
 - indexer passing content to a separate running `collective.elastic.ingest <https://github.com/collective/collective.elastic.ingest>`_ service.
 - index acting as a proxy to ElasticSearch, integrates with ZCatalog
 - custom plugins for ``plone.restapi`` to provide structural information for the ingestion service
-- REST api endpoint @kitsearch accepting Elasticsearch query returning results with Plone permission check.
+- REST api endpoint ``@kitsearch`` accepting Elasticsearch query returning results with Plone permission check.
 
 
 Installation

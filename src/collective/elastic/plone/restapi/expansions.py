@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+from Acquisition import aq_base
 from plone import api
+from plone.restapi.behaviors import IBlocks
 from plone.restapi.indexers import extract_text
 from plone.restapi.interfaces import IExpandableElement
 from zope.annotation import IAnnotations
@@ -19,8 +21,8 @@ class CollectiveElastic(object):
     def _getBlocksPlainText(self, obj):
         """Extract text from blocks and subblocks."""
         request = getRequest()
-        blocks = obj.blocks
-        blocks_layout = obj.blocks_layout
+        blocks = aq_base(obj).blocks
+        blocks_layout = aq_base(obj).blocks_layout
         blocks_text = []
         for block_id in blocks_layout.get("items", []):
             block = blocks.get(block_id, {})
@@ -51,8 +53,6 @@ class CollectiveElastic(object):
         # allowedRolesAndUsers
         index = catalog._catalog.getIndex("allowedRolesAndUsers")
 
-        # blocks_plaintext
-        blocks_plaintext = self._getBlocksPlainText(self.context)
 
         result["collectiveelastic"].update(
             {
@@ -60,7 +60,10 @@ class CollectiveElastic(object):
                 "last_indexing_queued": ts,
                 "allowedRolesAndUsers":
                     index.getEntryForObject(rid, default=[]),
-                "blocks_plaintext": blocks_plaintext
             }
         )
+        # blocks_plaintext - only for Volto, not for ClassicUI
+        # or Dexterity types w/o blocks behavior
+        if IBlocks.providedBy(self.context):
+            result["blocks_plaintext"] = self._getBlocksPlainText(self.context)
         return result

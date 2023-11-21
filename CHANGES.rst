@@ -5,7 +5,8 @@ Changelog
 1.1.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Do not expect Volto to be installed/available.
+  Works now in plain Classic UI again. [jensens]
 
 
 1.1.4 (2023-08-17)
