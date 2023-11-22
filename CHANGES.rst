@@ -14,7 +14,7 @@ Changelog
 - Remove Plone 5 bbb imports. [jensens]
 - Minor refactoring of kitsearch to be more readable, introduce deepmerge package [jensens]
 - Rename env var ELASTICSEARCH_INDEX to INDEX_NAME.
-  This way we are harmonized with collective.elastic.ingest, which uses the INDEX_ prfix in 2.x. [jensens]
+  This way we are harmonized with collective.elastic.ingest, which uses the INDEX_ prefix in 2.x. [jensens]
 - Refactoring: Retire eslib, use collective.elastic.ingest.client.get_client and INDEX_NAME as global instead. [jensens]
 - Test: Refactor to use pytest [jensens]
 
