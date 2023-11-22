@@ -30,6 +30,7 @@ dependencies = [
     "plone.restapi",  # pulls in whole Products.CMFPlone too
     "collective.elastic.ingest>=2.0.0b10",
     "jinja2",
+    "deepmerge",
 ]
 
 [project.urls]
