@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 
 def get_query_client(elasticsearch_server_baseurl=None):
     """return elasticsearch client for ingest"""
-    return get_ingest_client(
-        elasticsearch_server_baseurl=elasticsearch_server_baseurl)
+    return get_ingest_client(elasticsearch_server_baseurl=elasticsearch_server_baseurl)
 
 
 def index_name():

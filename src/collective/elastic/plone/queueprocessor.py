@@ -6,9 +6,9 @@ from collective.elastic.plone.interfaces import IElasticSearchIndexQueueProcesso
 from kombu.exceptions import OperationalError
 from plone import api
 from plone.dexterity.interfaces import IDexterityContent
+from Products.GenericSetup.tool import UNKNOWN
 from zope.annotation import IAnnotations
 from zope.interface import implementer
-from Products.GenericSetup.tool import UNKNOWN
 
 import logging
 import time
@@ -23,7 +23,9 @@ class ElasticSearchIndexQueueProcessor(object):
 
     def _active(self):
         portal_setup = api.portal.get_tool("portal_setup")
-        return portal_setup.getLastVersionForProfile("collective-elastic-plone") != UNKNOWN
+        return (
+            portal_setup.getLastVersionForProfile("collective-elastic-plone") != UNKNOWN
+        )
 
     def index(self, obj, attributes=None):
         if not self._active() or not IDexterityContent.providedBy(obj):

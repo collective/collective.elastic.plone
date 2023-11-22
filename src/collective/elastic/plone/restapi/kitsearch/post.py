@@ -6,12 +6,12 @@ from elasticsearch.exceptions import TransportError
 from plone import api
 from plone.restapi.deserializer import json_body
 from plone.restapi.services import Service
-from Products.CMFCore.utils import getToolByName
 from pprint import pprint
+from Products.CMFCore.utils import getToolByName
 
 import json
-import requests
 import logging
+import requests
 
 
 logger = logging.getLogger(__name__)

@@ -5,6 +5,7 @@
 *.py?
 *.swp
 # dirs
+__pycache__/
 build/
 htmlcov/
 node_modules/

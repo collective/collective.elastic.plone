@@ -34,8 +34,8 @@ class CollectiveElastic(object):
         result = {
             "collectiveelastic": {
                 "@id": f"{self.context.absolute_url()}/@collectiveelastic"
-                }
             }
+        }
         if not expand:
             return result
 
@@ -53,13 +53,11 @@ class CollectiveElastic(object):
         # allowedRolesAndUsers
         index = catalog._catalog.getIndex("allowedRolesAndUsers")
 
-
         result["collectiveelastic"].update(
             {
                 "catalog_rid": rid,
                 "last_indexing_queued": ts,
-                "allowedRolesAndUsers":
-                    index.getEntryForObject(rid, default=[]),
+                "allowedRolesAndUsers": index.getEntryForObject(rid, default=[]),
             }
         )
         # blocks_plaintext - only for Volto, not for ClassicUI

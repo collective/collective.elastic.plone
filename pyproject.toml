@@ -65,8 +65,8 @@ testpaths = [
 [tool.isort]
 profile = "plone"
 
-[tool.black]
-include = "src"
+# [tool.black]
+# include = "src"
 
 [tool.codespell]
 ignore-words-list = "discreet,"

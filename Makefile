@@ -48,7 +48,7 @@ PYTHON_BIN?=python3
 
 # Minimum required Python version.
 # Default: 3.7
-PYTHON_MIN_VERSION?=3.7
+PYTHON_MIN_VERSION?=3.9
 
 # Flag whether to use virtual environment. If `false`, the
 # interpreter according to `PYTHON_BIN` found in `PATH` is used.
