@@ -1,7 +1,7 @@
+from . import INDEX_NAME
+from .interfaces import IElasticSearchIndexQueueProcessor
 from collective.elastic.ingest.celery import index
 from collective.elastic.ingest.celery import unindex
-from collective.elastic.plone.eslib import index_name
-from collective.elastic.plone.interfaces import IElasticSearchIndexQueueProcessor
 from kombu.exceptions import OperationalError
 from plone import api
 from plone.dexterity.interfaces import IDexterityContent
@@ -33,7 +33,7 @@ class ElasticSearchIndexQueueProcessor:
         ts = time.time()
         annotations = IAnnotations(obj)
         annotations["ELASTIC_LAST_INDEXING_QUEUED_TIMESTAMP"] = ts
-        index.delay("/".join(obj.getPhysicalPath()), ts, index_name())
+        index.delay("/".join(obj.getPhysicalPath()), ts, INDEX_NAME)
 
     def reindex(self, obj, attributes=None, update_metadata=1):
         if not self._active():
@@ -50,7 +50,7 @@ class ElasticSearchIndexQueueProcessor:
         if not self._active():
             return
         uid = api.content.get_uuid(obj)
-        unindex.delay(uid, index_name())
+        unindex.delay(uid, INDEX_NAME)
 
     def begin(self):
         pass

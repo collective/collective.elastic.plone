@@ -1,5 +1,5 @@
+from . import INDEX_NAME
 from collective.elastic.ingest.celery import index
-from collective.elastic.plone.eslib import index_name
 from plone import api
 from Products.Five.browser import BrowserView
 
@@ -12,6 +12,6 @@ class UpdateElastisearch(BrowserView):
             if path.endswith("/portal_catalog"):
                 # no idea why it is in the list, ignore
                 continue
-            index.delay(path, 0, index_name())
+            index.delay(path, 0, INDEX_NAME)
             count += 1
         return "queued {}".format(count)

@@ -1,17 +1,24 @@
+from ... import INDEX_NAME
 from AccessControl import getSecurityManager
-from collective.elastic.plone.eslib import get_query_client
-from elasticsearch.exceptions import NotFoundError
-from elasticsearch.exceptions import RequestError
-from elasticsearch.exceptions import TransportError
+from collective.elastic.ingest import OPENSEARCH
+from collective.elastic.ingest.client import get_client
 from plone import api
 from plone.restapi.deserializer import json_body
 from plone.restapi.services import Service
 from Products.CMFCore.utils import getToolByName
 
 import deepmerge
-import json
 import logging
-import requests
+
+
+if OPENSEARCH:
+    from opensearchpy.exceptions import NotFoundError
+    from opensearchpy.exceptions import RequestError
+    from opensearchpy.exceptions import TransportError
+else:
+    from elasticsearch.exceptions import NotFoundError
+    from elasticsearch.exceptions import RequestError
+    from elasticsearch.exceptions import TransportError
 
 
 logger = logging.getLogger(__name__)
@@ -51,7 +58,6 @@ class Kitsearch(Service):
         """Fetch with Python elasticsearch module."""
 
         elasticsearch_url = data.get("elasticsearch_url", "http://localhost:9200")
-        INDEX_NAME = data.get("INDEX_NAME", "plone")
         query_body = data.get("elasticsearch_payload", {})
 
         es_kwargs = dict(
@@ -61,7 +67,7 @@ class Kitsearch(Service):
         )
         if not query_body.get("size", None):
             es_kwargs["size"] = 10
-        es = get_query_client(elasticsearch_url)
+        es = get_client(elasticsearch_url)
         try:
             result = es.search(**es_kwargs)
         except RequestError as e:
