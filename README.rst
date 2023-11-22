@@ -23,7 +23,7 @@ Add ``collective.elastic.plone``` to your ``requirements.txt``.
 Provide an environments variable file `.env` in your backend directory with::
 
     export CELERY_BROKER=redis://localhost:6379/0
-    export ELASTICSEARCH_INDEX=plone
+    export INDEX_NAME=plone
     export ELASTICSEARCH_QUERY_SERVER={{elasticsearch_address}}
 
 
@@ -41,7 +41,7 @@ Install `collective.elastic.plone` by adding it to your buildout::
 
     environment-vars +=
         CELERY_BROKER redis://localhost:6379/0
-        ELASTICSEARCH_INDEX plone
+        INDEX_NAME plone
         ELASTICSEARCH_QUERY_SERVER http://localhost:9200
         ELASTICSEARCH_QUERY_USE_SSL 0
 
