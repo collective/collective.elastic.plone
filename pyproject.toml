@@ -1,0 +1,84 @@
+[project]
+name = "collective.elastic.plone"
+version = "2.0.0b1.dev0"
+description = "Plone Search Integration: Addon to index content in Open-/ElasticSearch"
+keywords = ["elasticsearch", "opensearch", "plone", "celery", "search", "indexer"]
+readme = "README.rst"
+
+authors = [
+    {name = "Jens Klein", email = "jk@kleinundpartner.at"},
+    {name = "Katja Süss"},
+    {name = "Peter Holzer"},
+]
+requires-python = ">=3.9"
+license = { text = "GPL 2.0" }
+classifiers = [
+    "Environment :: Web Environment",
+    "Framework :: Plone",
+    "Framework :: Plone :: Addon",
+    "Framework :: Plone :: 6.0",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+    "Development Status :: 5 - Production/Stable",
+]
+dependencies = [
+    "plone.restapi",  # pulls in whole Products.CMFPlone too
+    "collective.elastic.ingest>=2.0.0b10",
+    "jinja2",
+]
+
+[project.urls]
+PyPI = "https://pypi.python.org/pypi/collective.elastic.plone"
+Changelog = "https://github.com/collective/collective.elastic.plone/blob/main/CHANGES.rst"
+Source = "https://github.com/collective/collective.elastic.plone"
+Issues = "https://github.com/collective/collective.elastic.plone/issues"
+
+[project.optional-dependencies]
+redis = ["collective.elastic.ingest[redis]"]
+rabbitmq = ["collective.elastic.ingest[rabbitmq]"]
+opensearch = ["collective.elastic.ingest[opensearch]"]
+elasticsearch = ["collective.elastic.ingest[elasticsearch]"]
+sentry = ["sentry-sdk"]
+test = [
+    "plone.app.contenttypes[test]",
+    "pdbpp",
+]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = [
+    "src",
+]
+
+[tool.isort]
+profile = "plone"
+
+[tool.black]
+include = "src"
+
+[tool.codespell]
+ignore-words-list = "discreet,"
+skip = './examples/*,./venv/*'
+
+[tool.check-manifest]
+ignore = [
+    ".editorconfig",
+    ".pre-commit-config.yaml",
+    "tox.ini",
+    "mypy.ini",
+    ".flake8",
+    "mx.ini",
+
+]

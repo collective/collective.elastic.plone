@@ -19,7 +19,7 @@ logger = logging.getLogger("collective.elastic.index")
 
 @implementer(IElasticSearchIndexQueueProcessor)
 class ElasticSearchIndexQueueProcessor(object):
-    """a queue processor for ElasticSearch"""
+    """a queue processor for Open-/ElasticSearch"""
 
     def _active(self):
         portal_setup = api.portal.get_tool("portal_setup")
@@ -41,7 +41,8 @@ class ElasticSearchIndexQueueProcessor(object):
             self.index(obj, attributes)
         except OperationalError as e:
             logger.exception(
-                f"ElasticSearchIndexQueueProcessor. Reindexing failed: {str(e)}. Check ElasticSearch configuration."
+                f"ElasticSearchIndexQueueProcessor. Reindexing failed: {str(e)}. "
+                "Check Open-/ ElasticSearch configuration."
             )
 
     def unindex(self, obj):

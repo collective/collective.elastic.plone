@@ -1,3 +1,4 @@
--c constraints_plone52.txt
-setuptools
-zc.buildout
+-c constraints.txt
+-e .[redis,opensearch,test]
+waitress_fastlisten
+

@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.5 (unreleased)
+2.0.0 (unreleased)
 ------------------
 
 - Do not expect Volto to be installed/available.
