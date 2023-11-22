@@ -1,4 +1,4 @@
-from . import INDEX_NAME
+from .. import INDEX_NAME
 from collective.elastic.ingest.celery import index
 from plone import api
 from Products.Five.browser import BrowserView
