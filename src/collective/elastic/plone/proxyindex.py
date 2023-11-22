@@ -10,8 +10,8 @@ from OFS.SimpleItem import SimpleItem
 from Products.GenericSetup.interfaces import ISetupEnviron
 from Products.GenericSetup.utils import NodeAdapterBase
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from Products.ZCatalog.query import IndexQuery
 from Products.PluginIndexes.interfaces import ISortIndex
+from Products.ZCatalog.query import IndexQuery
 from zope.component import adapter
 from zope.interface import implementer
 
