@@ -111,7 +111,7 @@ TEST_COMMAND?=.mxmake/files/run-tests.sh
 # Additional Python requirements for running tests to be
 # installed (via pip).
 # Default: pytest
-TEST_REQUIREMENTS?=pytest
+TEST_REQUIREMENTS?=-e .[test]
 
 # Additional make targets the test target depends on.
 # No default value.
