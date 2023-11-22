@@ -1,11 +1,5 @@
 from AccessControl import ClassSecurityInfo
-
-
-try:
-    from AccessControl.class_init import InitializeClass
-except ImportError:
-    from App.class_init import InitializeClass
-
+from AccessControl.class_init import InitializeClass
 from AccessControl.requestmethod import postonly
 from BTrees.IIBTree import IIBTree
 from collective.elastic.plone.eslib import get_query_client
@@ -16,13 +10,7 @@ from OFS.SimpleItem import SimpleItem
 from Products.GenericSetup.interfaces import ISetupEnviron
 from Products.GenericSetup.utils import NodeAdapterBase
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-
-
-try:
-    from Products.ZCatalog.query import IndexQuery
-except ImportError:
-    from Products.PluginIndexes.common.util import parseIndexRequest as IndexQuery
-
+from Products.ZCatalog.query import IndexQuery
 from Products.PluginIndexes.interfaces import ISortIndex
 from zope.component import adapter
 from zope.interface import implementer
