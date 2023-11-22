@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.elastic.ingest.celery import index
 from collective.elastic.plone.eslib import index_name
 from plone import api
@@ -15,4 +14,4 @@ class UpdateElastisearch(BrowserView):
                 continue
             index.delay(path, 0, index_name())
             count += 1
-        return "queued {0}".format(count)
+        return "queued {}".format(count)

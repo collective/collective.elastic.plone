@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.elastic.ingest.elastic import get_ingest_client
 
 import logging

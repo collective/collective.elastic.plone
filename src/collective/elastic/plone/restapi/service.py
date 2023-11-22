@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.restapi.services import Service as BaseService
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
@@ -22,7 +21,7 @@ class Service(BaseService):
 @implementer(IPublishTraverse)
 class TraversingService(Service):
     def __init__(self, context, request):
-        super(TraversingService, self).__init__(context, request)
+        super().__init__(context, request)
         self.params = []
 
     def publishTraverse(self, request, name):

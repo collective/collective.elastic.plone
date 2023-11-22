@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Setup tests for this package."""
 from collective.elastic.plone.testing import COLLECTIVE_ES_PLONE_INTEGRATION_TESTING
 

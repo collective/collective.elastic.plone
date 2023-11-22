@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from AccessControl import ClassSecurityInfo
 
 
@@ -97,8 +96,8 @@ class ElasticSearchProxyIndex(SimpleItem):
         """stores changed extras"""
         self.query_template = REQUEST.form["extra"]["query_template"]
         REQUEST["RESPONSE"].redirect(
-            "{0}/manage_catalogIndexes?manage_tabs_message=Updated "
-            "index settings for {1}".format(self.aq_parent.absolute_url(), self.id)
+            "{}/manage_catalogIndexes?manage_tabs_message=Updated "
+            "index settings for {}".format(self.aq_parent.absolute_url(), self.id)
         )
 
     ###########################################################################
@@ -176,7 +175,7 @@ class ElasticSearchProxyIndex(SimpleItem):
                 key = key.encode("utf8")
             keys.append(key)
         template_params = {"keys": keys}
-        __traceback_info__ = "template parameters: {0}".format(template_params)
+        __traceback_info__ = "template parameters: {}".format(template_params)
         query_body = self._apply_template(template_params)
         logger.info("query_body", query_body)
         es_kwargs = dict(
@@ -192,7 +191,7 @@ class ElasticSearchProxyIndex(SimpleItem):
             logger.info("** Response ElasticSearch ")
             logger.info(result)
         except RequestError:
-            logger.info("Query failed:\n{0}".format(query_body))
+            logger.info("Query failed:\n{}".format(query_body))
             return None
         except TransportError:
             logger.exception("ElasticSearch failed")

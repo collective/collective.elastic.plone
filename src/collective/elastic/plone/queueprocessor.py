@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.elastic.ingest.celery import index
 from collective.elastic.ingest.celery import unindex
 from collective.elastic.plone.eslib import index_name
@@ -18,7 +17,7 @@ logger = logging.getLogger("collective.elastic.index")
 
 
 @implementer(IElasticSearchIndexQueueProcessor)
-class ElasticSearchIndexQueueProcessor(object):
+class ElasticSearchIndexQueueProcessor:
     """a queue processor for Open-/ElasticSearch"""
 
     def _active(self):

@@ -9,7 +9,7 @@ from zope.publisher.interfaces.browser import IBrowserRequest
 
 @implementer(IBlockSearchableText)
 @adapter(IBlocks, IBrowserRequest)
-class AccordionBlockSearchableText(object):
+class AccordionBlockSearchableText:
     def __init__(self, context, request):
         self.context = context
         self.request = request
@@ -29,7 +29,7 @@ class AccordionBlockSearchableText(object):
 
 @implementer(IBlockSearchableText)
 @adapter(IBlocks, IBrowserRequest)
-class TeaserBlockSearchableText(object):
+class TeaserBlockSearchableText:
     def __init__(self, context, request):
         self.context = context
         self.request = request

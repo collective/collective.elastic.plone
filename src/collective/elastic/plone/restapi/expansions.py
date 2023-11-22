@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Acquisition import aq_base
 from plone import api
 from plone.restapi.behaviors import IBlocks
@@ -13,7 +12,7 @@ from zope.interface import Interface
 
 @implementer(IExpandableElement)
 @adapter(Interface, Interface)
-class CollectiveElastic(object):
+class CollectiveElastic:
     def __init__(self, context, request):
         self.context = context
         self.request = request
