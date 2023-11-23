@@ -47,6 +47,7 @@ elasticsearch = ["collective.elastic.ingest[elasticsearch]"]
 sentry = ["sentry-sdk"]
 test = [
     "plone.app.contenttypes[test]",
+    "pytest-plone",
     "pdbpp",
 ]
 
