@@ -164,7 +164,8 @@ In the file system it can be configured as any other index in the ``portal_catal
 The index configuration looks like so:
 
 .. code-block:: xml
-      <index meta_type="ElasticSearchProxyIndex"
+
+    <index meta_type="ElasticSearchProxyIndex"
             name="SearchableText"
     >
         <querytemplate>
@@ -221,6 +222,7 @@ The index configuration looks like so:
         }
     }
         </querytemplate>
+    </index>
 
 It uses Jinja2 templating to inject the search term into the query.
 The variable ``keys`` is a list of search terms, usually just one.
