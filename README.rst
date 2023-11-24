@@ -247,7 +247,7 @@ Contributions
 
 Idea and testing: Peter Holzer
 
-Initial concept & code by Jens W. Klein
+Initial concept & code by Jens W. Klein (Github: @jensens)
 
 Contributors:
 
