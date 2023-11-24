@@ -25,14 +25,14 @@ Installation
 Preconditions
 -------------
 
-You need a working `collective.elastic.ingest\>=2.0.0b11 <https://pypi.org/project/collective.elastic.ingest/>`_ service running.
+You need a working `collective.elastic.ingest <https://pypi.org/project/collective.elastic.ingest/>`_ service running.
 This implies a running Redis instance and a running Open- xor ElasticSearch instance.
 
 ------------
 mxdev/mxmake
 ------------
 
-Add ``collective.elastic.plone[redis,opensearch]`` to your ``requirements.txt``.
+Add ``collective.elastic.plon>[redis,opensearch]>=2.0.0b11`` to your ``requirements.txt``.
 The extra requirements are needed for the queue server and index server used and may vary, see below.
 Alternatively add it to your ``pyproject.toml`` as dependencies (or in case of legacy code to ``setup.[py|cfg]``).
 
@@ -51,7 +51,10 @@ Provide and *source* an environments variable file (i.e. `.env`) in your backend
 Buildout
 --------
 
-Install `collective.elastic.plone` by adding it to your buildout::
+Install ``collective.elastic.plone[redis,opensearch]>=2.0.0b11`` by adding it to your buildout.
+The extra requirements are needed for the queue server and index server used and may vary, see below.
+
+::
 
     [buildout]
 
@@ -59,7 +62,7 @@ Install `collective.elastic.plone` by adding it to your buildout::
 
     eggs =
         # ...
-        collective.elastic.plone
+        collective.elastic.plone[redis,opensearch]>=2.0.0b11
 
     environment-vars +=
         INDEX_SERVER=localhost:9200
