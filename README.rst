@@ -25,14 +25,14 @@ Installation
 Preconditions
 -------------
 
-You need a working `collective.elastic.ingest <https://pypi.org/project/collective.elastic.ingest/>`_ service running.
+You need a working `collective.elastic.ingest <https://pypi.org/project/collective.elastic.ingest/>`_ (>=2.0.0b11)service running.
 This implies a running Redis instance and a running Open- xor ElasticSearch instance.
 
 ------------
 mxdev/mxmake
 ------------
 
-Add ``collective.elastic.plon>[redis,opensearch]>=2.0.0b11`` to your ``requirements.txt``.
+Add ``collective.elastic.plone[redis,opensearch]>=2.0.0b11`` to your ``requirements.txt``.
 The extra requirements are needed for the queue server and index server used and may vary, see below.
 Alternatively add it to your ``pyproject.toml`` as dependencies (or in case of legacy code to ``setup.[py|cfg]``).
 
