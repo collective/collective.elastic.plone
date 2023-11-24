@@ -19,7 +19,9 @@ It consists of these parts:
 Installation
 ============
 
-**preconditions**
+-------------
+Preconditions
+-------------
 
 You need a working ``collective.elastic.ingest`` service running.
 This implies a running Redis instance and a running Open- xor ElasticSearch instance.
@@ -27,7 +29,8 @@ This implies a running Redis instance and a running Open- xor ElasticSearch inst
 
 **mxdev/mxmake**
 
-Add ``collective.elastic.plone``` to your ``requirements.txt``.
+Add ``collective.elastic.plone[redis,opensearch]`` to your ``requirements.txt``.
+The extra requirements are needed for the queue server and index server used and may vary, see below.
 Alternatively add it to your ``pyproject.toml`` as dependencies (or in case of legacy code to ``setup.[py|cfg]``).
 
 Provide and *source* an environments variable file (i.e. `.env`) in your backend directory before Plone startup with::
@@ -41,7 +44,9 @@ Provide and *source* an environments variable file (i.e. `.env`) in your backend
     export CELERY_BROKER=redis://localhost:6379/0
 
 
-**buildout**
+--------
+Buildout
+--------
 
 Install `collective.elastic.plone` by adding it to your buildout::
 
@@ -65,18 +70,35 @@ Install `collective.elastic.plone` by adding it to your buildout::
 
 and run ``bin/buildout``
 
+------------------
+Extra requirements
+------------------
 
-**after startup**
+Depending on the queue server and index server used, the extra requirements vary:
+
+- queue server: ``redis`` or ``rabbitmq``.
+- index server: ``opensearch`` or ``elasticsearch``.
+
+
+-------------
+After Startup
+-------------
 
 After startup you need to install the addon in Plone via the Addons control panel.
 This replaces the SearchableText index with the proxy index and a minimal configuration.
 Best is to alter the configuration to the projects needs.
 To index all content a manual re-index of the catalog is needed.
 
-**Volto**
+--------------
+Volto Frontend
+--------------
 
-In Volto a direct (and much faster) search is possible by using the ``@kitsearch`` endpoint, bypassing the catalog.
-The Volto add-on ``volto-searchkit-block`` provides a configurable block for this.
+The proxy index works out of the box in Volto.
+
+However, in Volto a direct (and much faster) search is possible by using the ``@kitsearch`` endpoint, bypassing the catalog.
+The endpoint takes a native Open-/ ElasticSearch query and returns the results with Plone permission check.
+
+The Volto add-on `volto-searchkit-block <https://github.com/rohberg/volto-searchkit-block/>`_ provides a configurable block using this endpoint.
 
 
 Configuration
