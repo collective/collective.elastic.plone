@@ -16,6 +16,8 @@ It consists of these parts:
 - REST API endpoint ``@kitsearch`` accepting Open-/ ElasticSearch query returning results with Plone permission check.
 
 
+.. contents:: Table of Contents
+
 Installation
 ============
 
@@ -26,8 +28,9 @@ Preconditions
 You need a working ``collective.elastic.ingest`` service running.
 This implies a running Redis instance and a running Open- xor ElasticSearch instance.
 
-
-**mxdev/mxmake**
+------------
+mxdev/mxmake
+------------
 
 Add ``collective.elastic.plone[redis,opensearch]`` to your ``requirements.txt``.
 The extra requirements are needed for the queue server and index server used and may vary, see below.
