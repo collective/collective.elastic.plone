@@ -158,7 +158,7 @@ CELERY_BROKER
 Proxy-index
 -----------
 
-Trough-the-web the proxy-index can be configured in the Zope Management Interface (ZMI) under ``portal_catalog``, then click on the ``ElasticSearchProxyIndex`` (i.e. ``SearchableText``).
+Through-the-web, the proxy-index can be configured in the Zope Management Interface (ZMI) under ``portal_catalog``, then click on the ``ElasticSearchProxyIndex`` (i.e. ``SearchableText``).
 
 In the file system it can be configured as any other index in the ``portal_catalog`` tool using a GenericSetup profile and placing a ``catalog.xml`` file in there.
 The index configuration looks like so:
