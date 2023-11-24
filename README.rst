@@ -163,65 +163,64 @@ Trough-the-web the proxy-index can be configured in the Zope Management Interfac
 In the file system it can be configured as any other index in the ``portal_catalog`` tool using a GenericSetup profile and placing a ``catalog.xml`` file in there.
 The index configuration looks like so:
 
-```xml
-  <index meta_type="ElasticSearchProxyIndex"
-         name="SearchableText"
-  >
-    <querytemplate>
-{
-    "query":{
-        "bool":{
-            "should":[
-                    {
-                        "query_string":{
-                            "query":"{{keys[0].decode('utf8')}}",
-                            "fields":[
-                                "title^1.2",
-                                "id",
-                                "description^1.1",
-                                "subjects^2"
-                                ]
-                        }
-                    },
-                    {
-                        "nested":{
-                            "path":"text__extracted",
-                            "query":{
-                                "query_string":{
-                                    "query":"{{keys[0].decode('utf8')}}",
-                                    "fields":["text__extracted.content"]
+.. code-block:: xml
+      <index meta_type="ElasticSearchProxyIndex"
+            name="SearchableText"
+    >
+        <querytemplate>
+    {
+        "query":{
+            "bool":{
+                "should":[
+                        {
+                            "query_string":{
+                                "query":"{{keys[0].decode('utf8')}}",
+                                "fields":[
+                                    "title^1.2",
+                                    "id",
+                                    "description^1.1",
+                                    "subjects^2"
+                                    ]
+                            }
+                        },
+                        {
+                            "nested":{
+                                "path":"text__extracted",
+                                "query":{
+                                    "query_string":{
+                                        "query":"{{keys[0].decode('utf8')}}",
+                                        "fields":["text__extracted.content"]
+                                    }
                                 }
                             }
-                        }
-                    },
-                    {
-                        "nested":{
-                            "path":"file__extracted",
-                            "query":{
-                                "query_string":{
-                                    "query":"{{keys[0].decode('utf8')}}",
-                                    "fields":["file__extracted.content"]
+                        },
+                        {
+                            "nested":{
+                                "path":"file__extracted",
+                                "query":{
+                                    "query_string":{
+                                        "query":"{{keys[0].decode('utf8')}}",
+                                        "fields":["file__extracted.content"]
+                                    }
                                 }
                             }
-                        }
-                    },
-                    {
-                        "nested":{
-                            "path":"image__extracted",
-                            "query":{
-                                "query_string":{
-                                    "query":"{{keys[0].decode('utf8')}}",
-                                    "fields":["image__extracted.content"]
+                        },
+                        {
+                            "nested":{
+                                "path":"image__extracted",
+                                "query":{
+                                    "query_string":{
+                                        "query":"{{keys[0].decode('utf8')}}",
+                                        "fields":["image__extracted.content"]
+                                }
                             }
                         }
                     }
-                }
-            ]
+                ]
+            }
         }
     }
-}
-    </querytemplate>
-```
+        </querytemplate>
 
 It uses Jinja2 templating to inject the search term into the query.
 The variable ``keys`` is a list of search terms, usually just one.
