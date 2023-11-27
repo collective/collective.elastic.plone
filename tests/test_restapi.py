@@ -439,6 +439,4 @@ class TestRestAPI(unittest.TestCase):
                 ],
             },
         }
-
-        breakpoint()
         self.assertEqual(result, expected)
