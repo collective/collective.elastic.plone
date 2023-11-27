@@ -43,7 +43,9 @@ class TestUninstall(unittest.TestCase):
 
     def test_product_uninstalled(self):
         """Test if collective.elastic.plone is cleanly uninstalled."""
-        self.assertFalse(self.installer.is_product_installed("collective.elastic.plone"))
+        self.assertFalse(
+            self.installer.is_product_installed("collective.elastic.plone")
+        )
 
     def test_browserlayer_removed(self):
         """Test that ICollectiveEsPloneLayer is removed."""

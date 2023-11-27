@@ -17,6 +17,7 @@ Changelog
   This way we are harmonized with collective.elastic.ingest, which uses the INDEX_ prefix in 2.x. [jensens]
 - Refactoring: Retire eslib, use collective.elastic.ingest.client.get_client and INDEX_NAME as global instead. [jensens]
 - Test: Refactor to use pytest [jensens]
+- Feature: @cesp endpoint gets language support [jensens]
 
 
 1.1.4 (2023-08-17)
