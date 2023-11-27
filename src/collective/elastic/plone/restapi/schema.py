@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-from collective.elastic.plone.restapi.service import Service
+from .service import Service
 from plone.behavior.interfaces import IBehavior
 from Products.CMFCore.interfaces import ITypeInformation
 from zope.component import getAllUtilitiesRegisteredFor

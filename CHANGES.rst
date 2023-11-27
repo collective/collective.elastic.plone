@@ -2,13 +2,21 @@ Changelog
 =========
 
 
-1.1.5 (unreleased)
+2.0.0 (unreleased)
 ------------------
 
 - Do not expect Volto to be installed/available.
   Works now in plain Classic UI again. [jensens]
-
 - Fix: Do not index if indexer is not installed. [jensens]
+- package: use mxmake/mxdev and go Plone 6 only [jensens]
+- package: use pyproject.toml, drop setup.* [jensens]
+- code-style: black, isort, zpretty, pyupgrade [jensens]
+- Remove Plone 5 bbb imports. [jensens]
+- Minor refactoring of kitsearch to be more readable, introduce deepmerge package [jensens]
+- Rename env var ELASTICSEARCH_INDEX to INDEX_NAME.
+  This way we are harmonized with collective.elastic.ingest, which uses the INDEX_ prefix in 2.x. [jensens]
+- Refactoring: Retire eslib, use collective.elastic.ingest.client.get_client and INDEX_NAME as global instead. [jensens]
+- Test: Refactor to use pytest [jensens]
 
 
 1.1.4 (2023-08-17)

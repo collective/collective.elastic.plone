@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
-from collective.elastic.ingest.elastic import get_ingest_client
+from . import INDEX_NAME
+from collective.elastic.ingest.client import get_client
 
 import logging
-import os
 
 
 logger = logging.getLogger(__name__)
@@ -10,9 +9,13 @@ logger = logging.getLogger(__name__)
 
 def get_query_client(elasticsearch_server_baseurl=None):
     """return elasticsearch client for ingest"""
-    return get_ingest_client(
-        elasticsearch_server_baseurl=elasticsearch_server_baseurl)
+    logger.warn(
+        ".eslib.get_query_client is deprecated, "
+        "use collective.elastic.ingest.client.client.get_client instead"
+    )
+    return get_client(elasticsearch_server_baseurl)
 
 
 def index_name():
-    return os.environ.get("ELASTICSEARCH_INDEX", "plone")
+    logger.warn(".eslib.index_name is deprecated, use global .INDEX_NAME instead")
+    return INDEX_NAME

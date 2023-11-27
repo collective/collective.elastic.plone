@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Setup tests for this package."""
 from collective.elastic.plone.testing import COLLECTIVE_ES_PLONE_INTEGRATION_TESTING
 from plone import api
@@ -21,7 +20,7 @@ class TestSetup(unittest.TestCase):
 
     def test_product_installed(self):
         """Test if collective.elastic.plone is installed."""
-        self.assertTrue(self.installer.isProductInstalled("collective.elastic.plone"))
+        self.assertTrue(self.installer.is_product_installed("collective.elastic.plone"))
 
     def test_browserlayer(self):
         """Test that ICollectiveEsPloneLayer is registered."""
@@ -32,7 +31,6 @@ class TestSetup(unittest.TestCase):
 
 
 class TestUninstall(unittest.TestCase):
-
     layer = COLLECTIVE_ES_PLONE_INTEGRATION_TESTING
 
     def setUp(self):
@@ -40,12 +38,12 @@ class TestUninstall(unittest.TestCase):
         self.installer = get_installer(self.portal, self.layer["request"])
         roles_before = api.user.get_roles(TEST_USER_ID)
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
-        self.installer.uninstallProducts(["collective.elastic.plone"])
+        self.installer.uninstall_product("collective.elastic.plone")
         setRoles(self.portal, TEST_USER_ID, roles_before)
 
     def test_product_uninstalled(self):
         """Test if collective.elastic.plone is cleanly uninstalled."""
-        self.assertFalse(self.installer.isProductInstalled("collective.elastic.plone"))
+        self.assertFalse(self.installer.is_product_installed("collective.elastic.plone"))
 
     def test_browserlayer_removed(self):
         """Test that ICollectiveEsPloneLayer is removed."""

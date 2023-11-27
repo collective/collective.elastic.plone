@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.elastic.plone.testing import COLLECTIVE_ES_PLONE_INTEGRATION_TESTING
 
 import unittest

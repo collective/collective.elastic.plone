@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Acquisition import aq_base
 from plone import api
 from plone.restapi.behaviors import IBlocks
@@ -13,7 +12,7 @@ from zope.interface import Interface
 
 @implementer(IExpandableElement)
 @adapter(Interface, Interface)
-class CollectiveElastic(object):
+class CollectiveElastic:
     def __init__(self, context, request):
         self.context = context
         self.request = request
@@ -34,8 +33,8 @@ class CollectiveElastic(object):
         result = {
             "collectiveelastic": {
                 "@id": f"{self.context.absolute_url()}/@collectiveelastic"
-                }
             }
+        }
         if not expand:
             return result
 
@@ -53,13 +52,11 @@ class CollectiveElastic(object):
         # allowedRolesAndUsers
         index = catalog._catalog.getIndex("allowedRolesAndUsers")
 
-
         result["collectiveelastic"].update(
             {
                 "catalog_rid": rid,
                 "last_indexing_queued": ts,
-                "allowedRolesAndUsers":
-                    index.getEntryForObject(rid, default=[]),
+                "allowedRolesAndUsers": index.getEntryForObject(rid, default=[]),
             }
         )
         # blocks_plaintext - only for Volto, not for ClassicUI

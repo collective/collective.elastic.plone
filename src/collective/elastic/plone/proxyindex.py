@@ -1,36 +1,30 @@
-# -*- coding: utf-8 -*-
+from . import INDEX_NAME
 from AccessControl import ClassSecurityInfo
-
-
-try:
-    from AccessControl.class_init import InitializeClass
-except ImportError:
-    from App.class_init import InitializeClass
-
+from AccessControl.class_init import InitializeClass
 from AccessControl.requestmethod import postonly
 from BTrees.IIBTree import IIBTree
-from collective.elastic.plone.eslib import get_query_client
-from collective.elastic.plone.eslib import index_name
-from elasticsearch.exceptions import RequestError
-from elasticsearch.exceptions import TransportError
+from collective.elastic.ingest import OPENSEARCH
+from collective.elastic.ingest.client import get_client
 from OFS.SimpleItem import SimpleItem
 from Products.GenericSetup.interfaces import ISetupEnviron
 from Products.GenericSetup.utils import NodeAdapterBase
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-
-
-try:
-    from Products.ZCatalog.query import IndexQuery
-except ImportError:
-    from Products.PluginIndexes.common.util import parseIndexRequest as IndexQuery
-
 from Products.PluginIndexes.interfaces import ISortIndex
+from Products.ZCatalog.query import IndexQuery
 from zope.component import adapter
 from zope.interface import implementer
 
 import jinja2
 import json
 import logging
+
+
+if OPENSEARCH:
+    from opensearchpy.exceptions import RequestError
+    from opensearchpy.exceptions import TransportError
+else:
+    from elasticsearch.exceptions import RequestError
+    from elasticsearch.exceptions import TransportError
 
 
 logger = logging.getLogger(__name__)
@@ -97,8 +91,8 @@ class ElasticSearchProxyIndex(SimpleItem):
         """stores changed extras"""
         self.query_template = REQUEST.form["extra"]["query_template"]
         REQUEST["RESPONSE"].redirect(
-            "{0}/manage_catalogIndexes?manage_tabs_message=Updated "
-            "index settings for {1}".format(self.aq_parent.absolute_url(), self.id)
+            "{}/manage_catalogIndexes?manage_tabs_message=Updated "
+            "index settings for {}".format(self.aq_parent.absolute_url(), self.id)
         )
 
     ###########################################################################
@@ -176,23 +170,23 @@ class ElasticSearchProxyIndex(SimpleItem):
                 key = key.encode("utf8")
             keys.append(key)
         template_params = {"keys": keys}
-        __traceback_info__ = "template parameters: {0}".format(template_params)
+        __traceback_info__ = "template parameters: {}".format(template_params)
         query_body = self._apply_template(template_params)
         logger.info("query_body", query_body)
         es_kwargs = dict(
-            index=index_name(),
+            index=INDEX_NAME,
             body=query_body,
             size=BATCH_SIZE,
             scroll="1m",
             _source_includes=["rid"],
         )
-        es = get_query_client()
+        client = get_client()
         try:
-            result = es.search(**es_kwargs)
+            result = client.search(**es_kwargs)
             logger.info("** Response ElasticSearch ")
             logger.info(result)
         except RequestError:
-            logger.info("Query failed:\n{0}".format(query_body))
+            logger.info("Query failed:\n{}".format(query_body))
             return None
         except TransportError:
             logger.exception("ElasticSearch failed")
@@ -211,7 +205,7 @@ class ElasticSearchProxyIndex(SimpleItem):
             sid = result["_scroll_id"]
             counter = BATCH_SIZE
             while counter < total:
-                result = es.scroll(scroll_id=sid, scroll="1m")
+                result = client.scroll(scroll_id=sid, scroll="1m")
                 for record in result["hits"]["hits"]:
                     retval[record["_source"]["rid"]] = score(record)
                 counter += BATCH_SIZE
@@ -219,10 +213,10 @@ class ElasticSearchProxyIndex(SimpleItem):
 
     def numObjects(self):
         """Return the number of indexed objects."""
-        es_kwargs = dict(index=index_name(), body={"query": {"match_all": {}}})
-        es = get_query_client()
+        es_kwargs = dict(index=INDEX_NAME, body={"query": {"match_all": {}}})
+        client = get_client()
         try:
-            return es.count(**es_kwargs)["count"]
+            return client.count(**es_kwargs)["count"]
         except Exception:
             logger.exception('ElasticSearch "count" query failed')
             return "Problem getting all documents count from ElasticSearch!"

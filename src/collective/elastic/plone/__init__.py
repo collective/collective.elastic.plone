@@ -1,9 +1,12 @@
-# -*- coding: utf-8 -*-
 """Init and utils."""
 from zope.i18nmessageid import MessageFactory
 
+import os
+
 
 _ = MessageFactory("collective.elastic.plone")
+
+INDEX_NAME = os.environ.get("INDEX_NAME", "plone")
 
 
 def initialize(context):

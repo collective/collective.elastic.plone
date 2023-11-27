@@ -4,28 +4,19 @@
 *.mo
 *.py?
 *.swp
-elasticsearch
 # dirs
-bin/
-buildout-cache/
-develop-eggs/
-eggs/
+__pycache__/
+build/
 htmlcov/
-include/
-lib/
-local/
 node_modules/
-parts/
-devsrc/*
-elasticsearch-*
-src/*
 dist/*
-test.plone_addon/
-var/
+venv/
+instance/
+sources/
+.mxmake/
 # files
-.installed.cfg
-.mr.developer.cfg
-lib64
+*-mxdev.txt
+.installed.txt
 log.html
 output.xml
 pip-selfcheck.json
