@@ -23,7 +23,8 @@ class ElasticSearchIndexQueueProcessor:
     def _active(self):
         portal_setup = api.portal.get_tool("portal_setup")
         return (
-            portal_setup.getLastVersionForProfile("collective.elastic.plone:default") != UNKNOWN
+            portal_setup.getLastVersionForProfile("collective.elastic.plone:default")
+            != UNKNOWN
         )
 
     def index(self, obj, attributes=None):
