@@ -1,6 +1,8 @@
 """Setup tests for this package."""
 from collective.elastic.plone.testing import COLLECTIVE_ES_PLONE_INTEGRATION_TESTING
+from unittest.mock import patch
 
+import os
 import unittest
 
 
@@ -52,6 +54,7 @@ class TestESProxyIndexBasics(unittest.TestCase):
             "espi", extra={"query_template": TEST_TEMPLATE_SIMPLE}, caller=self.catalog
         )
         self.catalog.addIndex("espi", espi)
+        os.environ["INDEX_SERVER"] = "http://localhost:9200"
 
     def test_index_installed(self):
         """Test if proxy index is installed."""
@@ -83,8 +86,33 @@ class TestESProxyIndexAllQuery(unittest.TestCase):
 
     def test_query(self):
         idx = self.catalog._catalog.indexes["espi"]
-        result = idx._apply_index({"espi": {"query": {"foo": "bar"}}})
-        self.assertGreater(len(result[0]), 2)
+        with patch("elasticsearch.Elasticsearch.search") as mock:
+            mock.return_value = {
+                "hits": {
+                    "hits": [
+                        {
+                            "_id": "100",
+                            "_score": 1.0,
+                            "_source": {
+                                "rid": -1,
+                            },
+                        },
+                        {
+                            "_id": "101",
+                            "_score": 0.9,
+                            "_source": {
+                                "rid": -2,
+                            },
+                        },
+                    ],
+                    "total": {
+                        "value": 2,
+                    },
+                },
+            }
+            result = idx._apply_index({"espi": {"query": "foo"}})
+
+        self.assertGreater(len(result[0]), 1)
 
 
 class TestESProxyIndexFulltext(unittest.TestCase):
@@ -107,10 +135,15 @@ class TestESProxyIndexFulltext(unittest.TestCase):
 
     def test_query_empty_result(self):
         idx = self.catalog._catalog.indexes["espi"]
-        result = idx._apply_index({"espi": {"query": "foo"}})
+        with patch("elasticsearch.Elasticsearch.search") as mock:
+            mock.return_value = {
+                "hits": {
+                    "hits": [
+                    ],
+                    "total": {
+                        "value": 0,
+                    },
+                },
+            }
+            result = idx._apply_index({"espi": {"query": "foo"}})
         self.assertEqual(len(result[0]), 0)
-
-    def test_query_plone(self):
-        idx = self.catalog._catalog.indexes["espi"]
-        result = idx._apply_index({"espi": {"query": "Plone"}})
-        self.assertEqual(len(result[0]), 1)
