@@ -71,7 +71,6 @@ LANGUAGE_TO_ANALYZER = {
     "no": "norwegian",
     "fa": "persian",
     "pt": "portuguese",
-    "pt-br": "portuguese",
     "ro": "romanian",
     "ru": "russian",
     "ku": "sorani",  # Kurdish dialect
