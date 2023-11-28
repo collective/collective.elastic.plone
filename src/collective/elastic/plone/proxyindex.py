@@ -265,8 +265,8 @@ class ElasticSearchProxyIndex(SimpleItem):
     def numObjects(self):
         """Return the number of indexed objects."""
         es_kwargs = dict(index=INDEX_NAME, body={"query": {"match_all": {}}})
-        client = get_client()
         try:
+            client = get_client()
             return client.count(**es_kwargs)["count"]
         except Exception:
             logger.exception('ElasticSearch "count" query failed')
