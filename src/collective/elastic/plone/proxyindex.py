@@ -6,6 +6,7 @@ from BTrees.IIBTree import IIBTree
 from collective.elastic.ingest import OPENSEARCH
 from collective.elastic.ingest.client import get_client
 from OFS.SimpleItem import SimpleItem
+from plone import api
 from Products.GenericSetup.interfaces import ISetupEnviron
 from Products.GenericSetup.utils import NodeAdapterBase
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
@@ -38,6 +39,43 @@ manage_addESPIndexForm = PageTemplateFile("www/addIndex", globals())
 
 BATCH_SIZE = 500
 
+LANGUAGE_TO_ANALYZER = {
+    "": "arabic",
+    "": "armenian",
+    "": "basque",
+    "": "bengali",
+    "": "brazilian",
+    "": "bulgarian",
+    "": "catalan",
+    "cz": "czech",
+    "": "danish",
+    "": "dutch",
+    "en": "english",
+    "": "estonian",
+    "": "finnish",
+    "fr": "french",
+    "": "galician",
+    "de": "german",
+    "": "greek",
+    "": "hindi",
+    "": "hungarian",
+    "": "indonesian",
+    "": "irish",
+    "it": "italian",
+    "": "latvian",
+    "": "lithuanian",
+    "": "norwegian",
+    "": "persian",
+    "pt": "portuguese",
+    "pt-br": "portuguese",
+    "ro": "romanian",
+    "ru": "russian",
+    "": "sorani",
+    "es": "spanish",
+    "se": "swedish",
+    "": "turkish",
+    "": "thai",
+}
 
 # Hint for my future self: When copying this code, never name it
 # manage_addIndex here. Otherwise install will be broken.
@@ -165,15 +203,18 @@ class ElasticSearchProxyIndex(SimpleItem):
             return None
         keys = []
         for key in record.keys:
-            key = key.replace("\\", "").replace('"', "")
-            if not isinstance(key, bytes):
-                key = key.encode("utf8")
+            key = key.replace("\\", "").replace('"', "").replace("*", "")
             keys.append(key)
-        template_params = {"keys": keys}
+        current_language = api.portal.get_current_language()
+        template_params = {
+            "keys": keys,
+            "language": current_language,
+            "analyzer": LANGUAGE_TO_ANALYZER.get(current_language, "standard"),
+        }
         __traceback_info__ = "template parameters: {}".format(template_params)
         query_body = self._apply_template(template_params)
         logger.info("query_body", query_body)
-        es_kwargs = dict(
+        search = dict(
             index=INDEX_NAME,
             body=query_body,
             size=BATCH_SIZE,
@@ -182,7 +223,7 @@ class ElasticSearchProxyIndex(SimpleItem):
         )
         client = get_client()
         try:
-            result = client.search(**es_kwargs)
+            result = client.search(**search)
             logger.info("** Response ElasticSearch ")
             logger.info(result)
         except RequestError:

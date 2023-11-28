@@ -2,14 +2,14 @@ Changelog
 =========
 
 
-2.0.0 (unreleased)
-------------------
+2.0.0a1 (unreleased)
+--------------------
 
 - Do not expect Volto to be installed/available.
   Works now in plain Classic UI again. [jensens]
 - Fix: Do not index if indexer is not installed. [jensens]
 - package: use mxmake/mxdev and go Plone 6 only [jensens]
-- package: use pyproject.toml, drop setup.* [jensens]
+- package: use pyproject.toml, drop setup.*, pep420 [jensens]
 - code-style: black, isort, zpretty, pyupgrade [jensens]
 - Remove Plone 5 bbb imports. [jensens]
 - Minor refactoring of kitsearch to be more readable, introduce deepmerge package [jensens]
@@ -18,6 +18,9 @@ Changelog
 - Refactoring: Retire eslib, use collective.elastic.ingest.client.get_client and INDEX_NAME as global instead. [jensens]
 - Test: Refactor to use pytest [jensens]
 - Feature: @cesp endpoint gets language support [jensens]
+- Fix tests and mock Elasticsearch client [jensens]
+- Feature: Add current language code and mapped analyzer to query template [jensens]
+- Feature: Reduce default query-template to a simple query and use analyzer [jensens]
 
 
 1.1.4 (2023-08-17)

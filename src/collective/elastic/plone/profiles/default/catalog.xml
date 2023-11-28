@@ -10,58 +10,18 @@
          name="SearchableText"
   >
     <querytemplate>
-{
-    "query":{
-        "bool":{
-            "should":[
-                    {
-                        "query_string":{
-                            "query":"{{keys[0].decode('utf8')}}",
-                            "fields":[
-                                "title^1.2",
-                                "id",
-                                "description^1.1",
-                                "subjects^2"
-                                ]
-                        }
-                    },
-                    {
-                        "nested":{
-                            "path":"text__extracted",
-                            "query":{
-                                "query_string":{
-                                    "query":"{{keys[0].decode('utf8')}}",
-                                    "fields":["text__extracted.content"]
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "nested":{
-                            "path":"file__extracted",
-                            "query":{
-                                "query_string":{
-                                    "query":"{{keys[0].decode('utf8')}}",
-                                    "fields":["file__extracted.content"]
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "nested":{
-                            "path":"image__extracted",
-                            "query":{
-                                "query_string":{
-                                    "query":"{{keys[0].decode('utf8')}}",
-                                    "fields":["image__extracted.content"]
-                            }
-                        }
-                    }
-                }
-            ]
+    "query": {
+        "multi_match": {
+            "query": "{{keys[0]}}",
+            "fields": [
+                "title.{{language}}*^1.5",
+                "text__extracted.{{language}}"
+            ],
+            "analyzer": "{{analyzer}}",
+            "type": "most_fields",
+            "minimum_should_match": "75%"
         }
     }
-}
     </querytemplate>
   </index>
 </object>
