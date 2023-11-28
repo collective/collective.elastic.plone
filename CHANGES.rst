@@ -8,9 +8,9 @@ Changelog
 - Do not expect Volto to be installed/available.
   Works now in plain Classic UI again. [jensens]
 - Fix: Do not index if indexer is not installed. [jensens]
-- package: use mxmake/mxdev and go Plone 6 only [jensens]
-- package: use pyproject.toml, drop setup.*, pep420 [jensens]
-- code-style: black, isort, zpretty, pyupgrade [jensens]
+- Package: use mxmake/mxdev and go Plone 6 only [jensens]
+- Package: use pyproject.toml, drop setup.*, pep420 [jensens]
+- Code-style: black, isort, zpretty, pyupgrade [jensens]
 - Remove Plone 5 bbb imports. [jensens]
 - Minor refactoring of kitsearch to be more readable, introduce deepmerge package [jensens]
 - Rename env var ELASTICSEARCH_INDEX to INDEX_NAME.
@@ -21,6 +21,8 @@ Changelog
 - Fix tests and mock Elasticsearch client [jensens]
 - Feature: Add current language code and mapped analyzer to query template [jensens]
 - Feature: Reduce default query-template to a simple query and use analyzer [jensens]
+- Security @kitsearch endpoint: We do not allow to pass the index name and the elasticsearch_url in the request body.
+  Instead we use the values from the config. [jensens]
 
 
 1.1.4 (2023-08-17)

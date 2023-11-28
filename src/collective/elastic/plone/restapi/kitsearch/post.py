@@ -31,21 +31,6 @@ class Kitsearch(Service):
         query (dict): elasticsearch_url, INDEX_NAME, elasticsearch_payload (query)
     """
 
-    # def searchSimple(self, data):
-    #     """Simple fetch with Python requests module."""
-    #     # dead code?
-    #     elasticsearch_url = data.get("elasticsearch_url", "http://localhost:9200")
-    #     INDEX_NAME = data.get("INDEX_NAME", "plone")
-    #     resp = requests.post(
-    #         f"{elasticsearch_url}/{INDEX_NAME}/_search",
-    #         headers={
-    #             "Accept": "application/json",
-    #             "Content-Type": "application/json",
-    #         },
-    #         json=data.get("elasticsearch_payload", {}),
-    #     )
-    #     return json.loads(resp.text)
-
     def reply(self):
         data = json_body(self.request)
 
@@ -56,18 +41,18 @@ class Kitsearch(Service):
 
     def search(self, data):
         """Fetch with Python elasticsearch module."""
+        # for security reasons we do not allow to pass the index name and the elasticsearch_url
+        # in the request body. Instead we use the values from the config.
 
-        elasticsearch_url = data.get("elasticsearch_url", "http://localhost:9200")
         query_body = data.get("elasticsearch_payload", {})
 
         es_kwargs = dict(
             index=INDEX_NAME,
             body=query_body,
-            # _source_includes=["rid"],
         )
         if not query_body.get("size", None):
             es_kwargs["size"] = 10
-        es = get_client(elasticsearch_url)
+        es = get_client()
         try:
             result = es.search(**es_kwargs)
         except RequestError as e:
