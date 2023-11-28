@@ -138,8 +138,7 @@ class TestESProxyIndexFulltext(unittest.TestCase):
         with patch("elasticsearch.Elasticsearch.search") as mock:
             mock.return_value = {
                 "hits": {
-                    "hits": [
-                    ],
+                    "hits": [],
                     "total": {
                         "value": 0,
                     },
