@@ -206,10 +206,17 @@ class ElasticSearchProxyIndex(SimpleItem):
             key = key.replace("\\", "").replace('"', "").replace("*", "")
             keys.append(key)
         current_language = api.portal.get_current_language()
+        analyzer = LANGUAGE_TO_ANALYZER.get(current_language, None)
+        if analyzer is None:
+            if "-" in current_language:
+                main_language = current_language.split("-")[0]
+                analyzer = LANGUAGE_TO_ANALYZER.get(main_language, "standard")
+            else:
+                analyzer = "standard"
         template_params = {
             "keys": keys,
             "language": current_language,
-            "analyzer": LANGUAGE_TO_ANALYZER.get(current_language, "standard"),
+            "analyzer": analyzer,
         }
         __traceback_info__ = "template parameters: {}".format(template_params)
         query_body = self._apply_template(template_params)
