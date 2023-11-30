@@ -3,9 +3,9 @@
 <main class="container-fluid">
   <style>
     #editdiv {
-    width: 800px;
-    height: 400px;
-  }
+      width: 800px;
+      height: 400px;
+    }
   </style>
   <p tal:content="python:request.form.get('message', '')"></p>
   <form action="manage_ESPIndexExtras" method="post" enctype="multipart/form-data">
@@ -53,6 +53,18 @@
           <div class="form-element">
             <input class="form-element" type="submit" name="submit" value=" Update " />
           </div>
+        </td>
+      </tr>
+      <tr>
+        <td align="left" valign="top">
+          <div class="form-optional">
+            Mapping of index
+          </div>
+        </td>
+        <td align="left" valign="top">
+          <pre>
+${python:context.index_mapping()}
+          </pre>
         </td>
       </tr>
     </table>

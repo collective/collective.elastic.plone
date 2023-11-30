@@ -23,6 +23,7 @@ Changelog
 - Feature: Reduce default query-template to a simple query and use analyzer [jensens]
 - Security @kitsearch endpoint: We do not allow to pass the index name and the elasticsearch_url in the request body.
   Instead we use the values from the config. [jensens]
+- Strip AND and OR from zcatalog query string. [jensens]
 
 
 1.1.4 (2023-08-17)

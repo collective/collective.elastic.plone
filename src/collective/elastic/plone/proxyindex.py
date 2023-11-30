@@ -7,6 +7,7 @@ from collective.elastic.ingest import OPENSEARCH
 from collective.elastic.ingest.client import get_client
 from OFS.SimpleItem import SimpleItem
 from plone import api
+from pprint import pformat
 from Products.GenericSetup.interfaces import ISetupEnviron
 from Products.GenericSetup.utils import NodeAdapterBase
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
@@ -200,13 +201,14 @@ class ElasticSearchProxyIndex(SimpleItem):
         records.  The second object is a tuple containing the names of
         all data fields used.
         """
-        logger.info(f"*** _apply_index {self.id}")
+        logger.debug(f"*** _apply_index {self.id}")
         record = IndexQuery(request, self.id)
         if record.keys is None:
             return None
         keys = []
         for key in record.keys:
             key = key.replace("\\", "").replace('"', "").replace("*", "")
+            key = key.replace(" AND ", " ").replace(" OR ", " ")
             keys.append(key)
         current_language = api.portal.get_current_language()
         analyzer = LANGUAGE_TO_ANALYZER.get(current_language, None)
@@ -223,7 +225,7 @@ class ElasticSearchProxyIndex(SimpleItem):
         }
         __traceback_info__ = "template parameters: {}".format(template_params)
         query_body = self._apply_template(template_params)
-        logger.info("query_body", query_body)
+        logger.debug(f"query_body : {query_body}")
         search = dict(
             index=INDEX_NAME,
             body=query_body,
@@ -231,25 +233,28 @@ class ElasticSearchProxyIndex(SimpleItem):
             scroll="1m",
             _source_includes=["rid"],
         )
+        if api.env.debug_mode():
+            search["_source_includes"].append("@id")
         client = get_client()
         try:
             result = client.search(**search)
-            logger.info("** Response ElasticSearch ")
-            logger.info(result)
         except RequestError:
-            logger.info("Query failed:\n{}".format(query_body))
+            logger.warn(f"Query failed:\n{query_body}")
             return None
         except TransportError:
             logger.exception("ElasticSearch failed")
             return None
+        logger.debug(f"Response Open-/ElasticSearch:\n{result}")
         # initial return value, other batches to be applied
 
-        def score(record):
-            return int(10000 * float(record["_score"]))
-
         retval = IIBTree()
-        for record in result["hits"]["hits"]:
-            retval[record["_source"]["rid"]] = score(record)
+
+        def _handle_records(records):
+            for record in records:
+                # map rid to score
+                retval[record["_source"]["rid"]] = int(10000 * float(record["_score"]))
+
+        _handle_records(result["hits"]["hits"])
 
         total = result["hits"]["total"]["value"]
         if total > BATCH_SIZE:
@@ -257,8 +262,7 @@ class ElasticSearchProxyIndex(SimpleItem):
             counter = BATCH_SIZE
             while counter < total:
                 result = client.scroll(scroll_id=sid, scroll="1m")
-                for record in result["hits"]["hits"]:
-                    retval[record["_source"]["rid"]] = score(record)
+                _handle_records(result["hits"]["hits"])
                 counter += BATCH_SIZE
         return retval, (self.id,)
 
@@ -270,7 +274,18 @@ class ElasticSearchProxyIndex(SimpleItem):
             return client.count(**es_kwargs)["count"]
         except Exception:
             logger.exception('ElasticSearch "count" query failed')
-            return "Problem getting all documents count from ElasticSearch!"
+            return "Problem getting all documents count from Open-/ ElasticSearch!"
+
+    @security.protected(MGMT_PERMISSION)
+    def index_mapping(self):
+        """Return the settings of the index."""
+        try:
+            client = get_client()
+            mapping = client.indices.get_mapping(index=INDEX_NAME)
+        except Exception:
+            logger.exception('Open-/ ElasticSearch "get_mapping" query failed')
+            return f"Problem getting mapping for index {INDEX_NAME} from Open-/ ElasticSearch!"
+        return pformat(mapping[INDEX_NAME]["mappings"]["properties"], indent=2)
 
     def indexSize(self):
         """Return the size of the index in terms of distinct values."""
