@@ -24,6 +24,7 @@ Changelog
 - Security @kitsearch endpoint: We do not allow to pass the index name and the elasticsearch_url in the request body.
   Instead we use the values from the config. [jensens]
 - Strip AND and OR from zcatalog query string. [jensens]
+- Add site_id, navroot_id and section_id to expansions. [jensens]
 
 
 1.1.4 (2023-08-17)
