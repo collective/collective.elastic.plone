@@ -58,7 +58,7 @@
       <tr>
         <td align="left" valign="top">
           <div class="form-optional">
-            Mapping of <code>${python:context.external_index_name()}</code>>
+            Mapping of <code>${python:context.external_index_name()}</code>:
           </div>
         </td>
         <td align="left" valign="top">
