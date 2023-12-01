@@ -277,8 +277,8 @@ class ElasticSearchProxyIndex(SimpleItem):
             return "Problem getting all documents count from Open-/ ElasticSearch!"
 
     @security.protected(MGMT_PERMISSION)
-    def index_mapping(self):
-        """Return the settings of the index."""
+    def external_index_mapping(self):
+        """Return the settings of the os/es index."""
         try:
             client = get_client()
             mapping = client.indices.get_mapping(index=INDEX_NAME)
@@ -286,6 +286,11 @@ class ElasticSearchProxyIndex(SimpleItem):
             logger.exception('Open-/ ElasticSearch "get_mapping" query failed')
             return f"Problem getting mapping for index {INDEX_NAME} from Open-/ ElasticSearch!"
         return pformat(mapping[INDEX_NAME]["mappings"]["properties"], indent=2)
+
+    @security.protected(MGMT_PERMISSION)
+    def external_index_name(self):
+        """Return the name of the os/es index."""
+        return INDEX_NAME
 
     def indexSize(self):
         """Return the size of the index in terms of distinct values."""

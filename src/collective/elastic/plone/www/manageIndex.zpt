@@ -33,7 +33,7 @@
       <tr>
         <td align="left" valign="top">
           <div class="form-label">
-            ElasticSearch <br />
+            Open-/ ElasticSearch<br />
             JSON-Query Template
           </div>
         </td>
@@ -58,12 +58,12 @@
       <tr>
         <td align="left" valign="top">
           <div class="form-optional">
-            Mapping of index
+            Mapping of <code>${python:context.external_index_name()}</code>>
           </div>
         </td>
         <td align="left" valign="top">
           <pre>
-${python:context.index_mapping()}
+${python:context.external_index_mapping()}
           </pre>
         </td>
       </tr>
