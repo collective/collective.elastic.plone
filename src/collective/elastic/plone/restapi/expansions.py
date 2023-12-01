@@ -1,6 +1,5 @@
 from Acquisition import aq_base
 from plone import api
-from plone.base.interfaces import INavigationRoot
 from plone.restapi.behaviors import IBlocks
 from plone.restapi.indexers import extract_text
 from plone.restapi.interfaces import IExpandableElement
@@ -9,7 +8,6 @@ from zope.component import adapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
 from zope.interface import Interface
-from zope.component.interfaces import ISite
 
 
 @implementer(IExpandableElement)
@@ -64,8 +62,8 @@ class CollectiveElastic:
 
         # site and section
         path = self.context.getPhysicalPath()
-        site = ISite(self.context).getPhysicalPath()
-        navroot = INavigationRoot(self.context).getPhysicalPath()
+        site = api.portal.get().getPhysicalPath()
+        navroot = api.portal.get_navigation_root(self.context).getPhysicalPath()
         result["collectiveelastic"]["site_id"] = site[-1]
         result["collectiveelastic"]["navroot_id"] = navroot[-1]
         if len(path) > len(navroot):
