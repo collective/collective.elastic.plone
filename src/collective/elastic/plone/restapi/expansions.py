@@ -1,5 +1,6 @@
 from Acquisition import aq_base
 from plone import api
+from plone.base.interfaces import INavigationRoot
 from plone.restapi.behaviors import IBlocks
 from plone.restapi.indexers import extract_text
 from plone.restapi.interfaces import IExpandableElement
@@ -8,6 +9,7 @@ from zope.component import adapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
 from zope.interface import Interface
+from zope.component.interfaces import ISite
 
 
 @implementer(IExpandableElement)
@@ -59,6 +61,18 @@ class CollectiveElastic:
                 "allowedRolesAndUsers": index.getEntryForObject(rid, default=[]),
             }
         )
+
+        # site and section
+        path = self.context.getPhysicalPath()
+        site = ISite(self.context).getPhysicalPath()
+        navroot = INavigationRoot(self.context).getPhysicalPath()
+        result["collectiveelastic"]["site_id"] = site[-1]
+        result["collectiveelastic"]["navroot_id"] = navroot[-1]
+        if len(path) > len(navroot):
+            result["collectiveelastic"]["section_id"] = path[len(navroot)]
+        else:
+            result["collectiveelastic"]["section_id"] = ""
+
         # blocks_plaintext - only for Volto, not for ClassicUI
         # or Dexterity types w/o blocks behavior
         if IBlocks.providedBy(self.context):
