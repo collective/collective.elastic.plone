@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-2.0.0a1 (unreleased)
---------------------
+2.0.0 (2023-12-05)
+------------------
 
 - Do not expect Volto to be installed/available.
   Works now in plain Classic UI again. [jensens]

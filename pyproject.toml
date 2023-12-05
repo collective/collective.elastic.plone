@@ -1,12 +1,14 @@
 [project]
 name = "collective.elastic.plone"
-version = "2.0.0b1.dev0"
+version = "2.0.0"
 description = "Plone Search Integration: Addon to index content in Open-/ElasticSearch"
 keywords = ["elasticsearch", "opensearch", "plone", "celery", "search", "indexer"]
 readme = "README.rst"
-
-authors = [
+maintainers = [
     {name = "Jens Klein", email = "jk@kleinundpartner.at"},
+]
+authors = [
+    {name = "Jens Klein"},
     {name = "Katja Süss"},
     {name = "Peter Holzer"},
 ]
