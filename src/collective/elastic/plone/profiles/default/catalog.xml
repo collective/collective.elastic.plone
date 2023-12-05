@@ -10,18 +10,26 @@
          name="SearchableText"
   >
     <querytemplate>
-    "query": {
-        "multi_match": {
-            "query": "{{keys[0]}}",
-            "fields": [
-                "title.{{language}}*^1.5",
-                "text__extracted.{{language}}"
-            ],
-            "analyzer": "{{analyzer}}",
-            "type": "most_fields",
-            "minimum_should_match": "75%"
-        }
-    }
+{
+  "query": {
+      "multi_match": {
+          "query": "{{keys[0]}}",
+          "fields": [
+            "title*^1.9",
+            "description*^1.5",
+            "text.data*^1.2",
+            "blocks_plaintext*^1.2"
+            "file__extracted.content*"
+          ],
+          "analyzer": "{{analyzer}}",
+          "operator": "or",
+          "fuzziness": "AUTO",
+          "prefix_length": 1,
+          "type": "most_fields",
+          "minimum_should_match": "75%"
+      }
+  }
+}
     </querytemplate>
   </index>
 </object>
