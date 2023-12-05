@@ -25,7 +25,7 @@ Installation
 Preconditions
 -------------
 
-You need a working `collective.elastic.ingest <https://pypi.org/project/collective.elastic.ingest/>`_ (version 2.x) service running.
+You need a working ``collective.elastic.ingest`` (version 2.x) service running.
 This implies a running Redis instance and a running Open- xor ElasticSearch instance.
 
 ------------
