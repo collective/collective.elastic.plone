@@ -1,4 +1,4 @@
-name: Release to PyPI and as OCI image
+name: Release to PyPI
 
 on:
   release:
