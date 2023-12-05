@@ -53,7 +53,9 @@ Buildout
 --------
 
 Install ``collective.elastic.plone[redis,opensearch]`` by adding it to your buildout.
-The extra requirements are needed for the queue server and index server used and may vary, see below.
+The extra requirements are needed for the queue server and index server used may vary, see below.
+Environment may vary too.
+Also, see below.
 
 ::
 
@@ -66,7 +68,7 @@ The extra requirements are needed for the queue server and index server used and
         collective.elastic.plone[redis,opensearch]
 
     environment-vars +=
-        INDEX_SERVER=localhost:9200query
+        INDEX_SERVER=localhost:9200
         INDEX_USE_SSL=1
         INDEX_OPENSEARCH=1
         INDEX_LOGIN=admin
