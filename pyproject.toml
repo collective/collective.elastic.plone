@@ -1,6 +1,6 @@
 [project]
 name = "collective.elastic.plone"
-version = "2.0.0a1.dev0"
+version = "2.0.0b1.dev0"
 description = "Plone Search Integration: Addon to index content in Open-/ElasticSearch"
 keywords = ["elasticsearch", "opensearch", "plone", "celery", "search", "indexer"]
 readme = "README.rst"
@@ -28,7 +28,7 @@ classifiers = [
 ]
 dependencies = [
     "plone.restapi",  # pulls in whole Products.CMFPlone too
-    "collective.elastic.ingest>=2.0.0b10",
+    "collective.elastic.ingest>=2.0.0rc9",
     "jinja2",
     "deepmerge",
 ]
