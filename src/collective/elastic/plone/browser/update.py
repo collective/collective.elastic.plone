@@ -14,4 +14,4 @@ class UpdateElastisearch(BrowserView):
                 continue
             index.delay(path, 0, INDEX_NAME)
             count += 1
-        return "queued {}".format(count)
+        return f"queued {count}"
