@@ -19,7 +19,7 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="ElasticSearch indexer and index"
+      title="OpenSearch/ Elasticsearch indexer and index"
       directory="profiles/default"
       description="Installs the collective.elastic.plone add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
@@ -28,7 +28,7 @@
 
   <genericsetup:registerProfile
       name="uninstall"
-      title="ElasticSearch indexer and index (uninstall)"
+      title="OpenSearch/ Elasticsearch indexer and index (uninstall)"
       directory="profiles/uninstall"
       description="Uninstalls the collective.elastic.plone add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
