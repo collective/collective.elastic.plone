@@ -99,7 +99,12 @@ After Startup
 After startup you need to install the addon in Plone via the Addons control panel.
 This replaces the SearchableText index with the proxy index and a minimal configuration.
 Best is to alter the configuration to the projects needs.
-To index all content a manual re-index of the catalog is needed.
+
+To index all content in the catalog, append ``/@@update-elasticsearch`` to the URL of your Plone site.
+This queues all content for indexing in ElasticSearch (but not in the ZCatalog).
+Alternatively a reindex catalog (in ZMI under advanced tab) works too.
+
+New or modified content is queued for indexing automatically.
 
 
 --------------

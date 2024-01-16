@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.0.2 (2024-xx-xx)
+------------------
+
+- Documentation: Clarify procedure to update/initialize the Open-/ElasticSearch with data. [jensens]
+
+
 2.0.1 (2024-01-16)
 ------------------
 
