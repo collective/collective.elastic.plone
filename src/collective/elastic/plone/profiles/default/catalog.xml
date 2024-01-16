@@ -18,7 +18,7 @@
             "title*^1.9",
             "description*^1.5",
             "text.data*^1.2",
-            "blocks_plaintext*^1.2"
+            "blocks_plaintext*^1.2",
             "file__extracted.content*"
           ],
           "analyzer": "{{analyzer}}",
