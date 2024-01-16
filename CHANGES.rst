@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.0.1 (2024-01-16)
+------------------
+
+- Fix: Kitsearch security check AttributeError [jensens]
+- Fix: Syntax error in query template [jensens]
+
 
 2.0.0 (2023-12-05)
 ------------------
