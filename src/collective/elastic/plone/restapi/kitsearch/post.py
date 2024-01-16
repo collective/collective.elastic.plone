@@ -72,7 +72,7 @@ class Kitsearch(Service):
 
     def _extend_es_query(self, esquery):
         """Extend query with roles, user and groups."""
-        if getSecurityManager.sm.checkPermission("Manage portal", self.context):
+        if getSecurityManager().checkPermission("Manage portal", self.context):
             # god-mode: query without allowedRolesAndUsers
             return esquery
         mtool = getToolByName(self.context, "portal_membership")
