@@ -10,7 +10,7 @@ default_context:
     wsgi_fast_listen: 0.0.0.0:8080
     initial_user_name: admin
     initial_user_password: admin
-    debug_mode: on
-    load_zcml:
-        package_includes: ["collective.elastic.plone",]
+    debug_mode: true
+    verbose_security: false
+    zcml_package_includes: collective.elastic.plone
     db_storage: direct
