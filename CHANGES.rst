@@ -1,18 +1,12 @@
 Changelog
 =========
 
-2.0.2 (2024-xx-xx)
+2.0.1 (2024-02-05)
 ------------------
 
-- Update Makefile and configuration.
+- Dev/CI/CD: Update Makefile and configuration.
   [thet, jensens]
-
 - Documentation: Clarify procedure to update/initialize the Open-/ElasticSearch with data. [jensens]
-
-
-2.0.1 (2024-01-16)
-------------------
-
 - Fix: Kitsearch security check AttributeError [jensens]
 - Fix: Syntax error in query template [jensens]
 
