@@ -10,7 +10,7 @@ build/
 htmlcov/
 node_modules/
 dist/*
-venv/
+.venv/
 instance/
 sources/
 .mxmake/

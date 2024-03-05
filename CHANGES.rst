@@ -4,8 +4,8 @@ Changelog
 2.0.2 (2024-xx-xx)
 ------------------
 
-- mxdev config: Fix debug mode in instance.yaml. Debug mode must be set as `"True"` or `"False"`, not `on` or `off`.
-  [thet]
+- Update Makefile and configuration.
+  [thet, jensens]
 
 - Documentation: Clarify procedure to update/initialize the Open-/ElasticSearch with data. [jensens]
 
