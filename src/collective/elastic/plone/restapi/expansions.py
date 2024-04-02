@@ -50,13 +50,16 @@ class CollectiveElastic:
         ts = annotations.get("ELASTIC_LAST_INDEXING_QUEUED_TIMESTAMP", 0)
 
         # allowedRolesAndUsers
-        index = catalog._catalog.getIndex("allowedRolesAndUsers")
+        index_allowedRolesAndUsers = catalog._catalog.getIndex(
+            "allowedRolesAndUsers")
 
         result["collectiveelastic"].update(
             {
                 "catalog_rid": rid,
                 "last_indexing_queued": ts,
-                "allowedRolesAndUsers": index.getEntryForObject(rid, default=[]),
+                "allowedRolesAndUsers":
+                    index_allowedRolesAndUsers.getEntryForObject(
+                        rid, default=[]),
             }
         )
 
@@ -74,5 +77,10 @@ class CollectiveElastic:
         # blocks_plaintext - only for Volto, not for ClassicUI
         # or Dexterity types w/o blocks behavior
         if IBlocks.providedBy(self.context):
-            result["blocks_plaintext"] = self._getBlocksPlainText(self.context)
+            result["collectiveelastic"].update(
+                {
+                    "blocks_plaintext": self._getBlocksPlainText(self.context)
+                }
+            )
+
         return result
