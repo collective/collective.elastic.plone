@@ -3,6 +3,7 @@ from AccessControl import getSecurityManager
 from collective.elastic.ingest import OPENSEARCH
 from collective.elastic.ingest.client import get_client
 from plone import api
+from pprint import pformat
 from plone.restapi.deserializer import json_body
 from plone.restapi.services import Service
 from Products.CMFCore.utils import getToolByName
@@ -46,27 +47,14 @@ class Kitsearch(Service):
 
         query_body = data.get("elasticsearch_payload", {})
 
-        es_kwargs = dict(
+        search_kwargs = dict(
             index=INDEX_NAME,
             body=query_body,
         )
         if not query_body.get("size", None):
-            es_kwargs["size"] = 10
-        es = get_client()
-        try:
-            result = es.search(**es_kwargs)
-        except RequestError as e:
-            self.request.response.setStatus(500)
-            return dict(error=dict(message=e.message))
-        except TransportError as e:
-            self.request.response.setStatus(503)
-            return dict(error=dict(message=e.message))
-        except NotFoundError as e:
-            self.request.response.setStatus(404)
-            return dict(error=dict(message=e.body["error"]["reason"]))
-        except Exception as e:
-            self.request.response.setStatus(500)
-            return dict(error=dict(message=e.message))
+            search_kwargs["size"] = 10
+        indexer_client = get_client()
+        result = indexer_client.search(**search_kwargs)
         # result is of type ObjectApiResponse
         return dict(result)
 
