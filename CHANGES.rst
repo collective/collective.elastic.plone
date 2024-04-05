@@ -3,7 +3,7 @@ Changelog
 
 
 - Add @@clear-and-update-index-server-index. [ksuess]
-- Expansions: all on key "collectiveelastic" [ksuess]
+- Fix error handling in REST API service @kitsearch [ksuess]
 
 
 2.0.1 (2024-02-05)
