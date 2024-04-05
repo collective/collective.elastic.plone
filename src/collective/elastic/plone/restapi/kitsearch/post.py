@@ -3,7 +3,6 @@ from AccessControl import getSecurityManager
 from collective.elastic.ingest import OPENSEARCH
 from collective.elastic.ingest.client import get_client
 from plone import api
-from pprint import pformat
 from plone.restapi.deserializer import json_body
 from plone.restapi.services import Service
 from Products.CMFCore.utils import getToolByName
