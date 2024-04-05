@@ -116,7 +116,7 @@ The proxy index works out of the box in Volto.
 However, in Volto a direct (and much faster) search is possible by using the ``@kitsearch`` endpoint, bypassing the catalog.
 The endpoint takes a native Open-/ ElasticSearch query and returns the results with Plone permission check.
 
-The Volto add-on `volto-searchkit-block <https://github.com/rohberg/volto-searchkit-block/>`_ (based on `react-searchkit <https://www.npmjs.com/package/react-searchkit>`_) provides a configurable block using this endpoint.
+The Volto add-on `@rohberg/volto-searchkit-block <https://github.com/rohberg/volto-searchkit-block/>`_ (based on `react-searchkit <https://www.npmjs.com/package/react-searchkit>`_) provides a configurable block using this endpoint.
 
 Remark:
 For security reasons, in collective.elastic.plone 2.0.0 the ``@kitsearch`` endpoint always overrides any "API URL" and "API index" settings with the configured values from the environment.
