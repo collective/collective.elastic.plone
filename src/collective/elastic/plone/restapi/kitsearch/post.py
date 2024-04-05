@@ -28,7 +28,7 @@ class Kitsearch(Service):
     """Request to Open-/ElasticSearch
 
     Args:
-        query (dict): elasticsearch_url, INDEX_NAME, elasticsearch_payload (query)
+        (dict): elasticsearch_payload (query. See request_example.json)
     """
 
     def reply(self):
@@ -41,8 +41,9 @@ class Kitsearch(Service):
 
     def search(self, data):
         """Fetch with Python elasticsearch module."""
-        # for security reasons we do not allow to pass the index name and the elasticsearch_url
-        # in the request body. Instead we use the values from the config.
+        # For security reasons we do not allow to pass the
+        # index name and the elasticsearch_url in the request body.
+        # Instead we use the values from the config.
 
         query_body = data.get("elasticsearch_payload", {})
 
