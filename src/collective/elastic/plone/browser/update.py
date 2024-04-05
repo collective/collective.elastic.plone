@@ -1,5 +1,9 @@
 from .. import INDEX_NAME
-from collective.elastic.ingest.celery import deleteindex, index
+from collective.elastic.ingest.celery import index
+try:
+    from collective.elastic.ingest.celery import deleteindex
+except ImportError:
+    deleteindex = None
 from plone import api
 from Products.Five.browser import BrowserView
 
@@ -20,7 +24,8 @@ class UpdateElastisearch(BrowserView):
 class ClearAndUpdateElastisearch(BrowserView):
     def __call__(self):
         # Delete index
-        deleteindex.delay(INDEX_NAME)
+        if deleteindex is not None:
+            deleteindex.delay(INDEX_NAME)
 
         # Index content
         cat = api.portal.get_tool("portal_catalog")
