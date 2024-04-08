@@ -174,7 +174,5 @@
                 "filter": {"match_all": {}},
             },
         },
-    },
-    "elasticsearch_url": "http://localhost:9200",
-    "elasticsearch_index": "plone2020",
+    }
 }

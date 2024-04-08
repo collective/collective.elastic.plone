@@ -13,6 +13,21 @@
 
   <browser:page
         for="*"
+        name="clear-and-update-index-server-index"
+        permission="cmf.ManagePortal"
+        class=".update.ClearAndUpdateElastisearch"
+        />
+
+  <browser:page
+        for="*"
+        name="update-index-server-index"
+        permission="cmf.ManagePortal"
+        class=".update.UpdateElastisearch"
+        />
+
+  <!-- Backward compatibility -->
+  <browser:page
+        for="*"
         name="update-elasticsearch"
         permission="cmf.ManagePortal"
         class=".update.UpdateElastisearch"

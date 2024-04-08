@@ -28,7 +28,7 @@ class Kitsearch(Service):
     """Request to Open-/ElasticSearch
 
     Args:
-        query (dict): elasticsearch_url, INDEX_NAME, elasticsearch_payload (query)
+        (dict): elasticsearch_payload (query. See request_example.json)
     """
 
     def reply(self):
@@ -41,32 +41,20 @@ class Kitsearch(Service):
 
     def search(self, data):
         """Fetch with Python elasticsearch module."""
-        # for security reasons we do not allow to pass the index name and the elasticsearch_url
-        # in the request body. Instead we use the values from the config.
+        # For security reasons we do not allow to pass the
+        # index name and the elasticsearch_url in the request body.
+        # Instead we use the values from the config.
 
         query_body = data.get("elasticsearch_payload", {})
 
-        es_kwargs = dict(
+        search_kwargs = dict(
             index=INDEX_NAME,
             body=query_body,
         )
         if not query_body.get("size", None):
-            es_kwargs["size"] = 10
-        es = get_client()
-        try:
-            result = es.search(**es_kwargs)
-        except RequestError as e:
-            self.request.response.setStatus(500)
-            return dict(error=dict(message=e.message))
-        except TransportError as e:
-            self.request.response.setStatus(503)
-            return dict(error=dict(message=e.message))
-        except NotFoundError as e:
-            self.request.response.setStatus(404)
-            return dict(error=dict(message=e.body["error"]["reason"]))
-        except Exception as e:
-            self.request.response.setStatus(500)
-            return dict(error=dict(message=e.message))
+            search_kwargs["size"] = 10
+        indexer_client = get_client()
+        result = indexer_client.search(**search_kwargs)
         # result is of type ObjectApiResponse
         return dict(result)
 
