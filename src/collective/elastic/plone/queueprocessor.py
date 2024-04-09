@@ -4,6 +4,7 @@ from collective.elastic.ingest.celery import index
 from collective.elastic.ingest.celery import unindex
 from kombu.exceptions import OperationalError
 from plone import api
+from plone.api.exc import CannotGetPortalError
 from plone.dexterity.interfaces import IDexterityContent
 from Products.GenericSetup.tool import UNKNOWN
 from zope.annotation import IAnnotations
@@ -21,9 +22,19 @@ class ElasticSearchIndexQueueProcessor:
     """a queue processor for Open-/ElasticSearch"""
 
     def _active(self):
-        portal_setup = api.portal.get_tool("portal_setup")
+        """ Use (not set up of) robot acceptance server with
+        plone.volto:multilingual fails if collective.elastic.plone in
+        CONFIGURE_PACKAGES
+        """
+        try:
+            portal_setup = api.portal.get_tool("portal_setup")
+        except CannotGetPortalError as e:
+            logger.error(e)
+            return
+
         return (
-            portal_setup.getLastVersionForProfile("collective.elastic.plone:default")
+            portal_setup.getLastVersionForProfile(
+                "collective.elastic.plone:default")
             != UNKNOWN
         )
 
