@@ -14,7 +14,7 @@ import logging
 import time
 
 
-logger = logging.getLogger("collective.elastic.index")
+logger = logging.getLogger("collective.elastic.plone")
 
 
 @implementer(IElasticSearchIndexQueueProcessor)
@@ -29,7 +29,7 @@ class ElasticSearchIndexQueueProcessor:
         try:
             portal_setup = api.portal.get_tool("portal_setup")
         except CannotGetPortalError as e:
-            logger.error(e)
+            logger.exception(e)
             return
 
         return (
@@ -49,6 +49,7 @@ class ElasticSearchIndexQueueProcessor:
 
     def reindex(self, obj, attributes=None, update_metadata=1):
         if not self._active():
+            logger.error(f"Reindexing of {obj} failed.'")
             return
         try:
             self.index(obj, attributes)
