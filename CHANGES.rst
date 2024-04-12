@@ -3,6 +3,7 @@ Changelog
 
 
 - Add @@clear-and-update-index-server-index. [ksuess]
+- Add profiles for testing single lingual and multi lingual. [ksuess]
 - Fix error handling in REST API service @kitsearch [ksuess]
 
 
