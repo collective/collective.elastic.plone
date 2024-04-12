@@ -35,6 +35,24 @@
       post_handler=".setuphandlers.uninstall"
       />
 
+  <genericsetup:registerProfile
+      name="singlelingual"
+      title="Testing profile single lingual"
+      directory="profiles/singlelingual"
+      description="Sets language to german"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      post_handler=".setuphandlers.post_install"
+      />
+
+  <genericsetup:registerProfile
+      name="multilingual"
+      title="Testing profile multilingual en/de"
+      directory="profiles/multilingual"
+      description="Makes site multilingual with languages english/german"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      post_handler=".setuphandlers.post_install"
+      />
+
   <utility
       factory=".setuphandlers.HiddenProfiles"
       name="collective.elastic.plone-hiddenprofiles"
