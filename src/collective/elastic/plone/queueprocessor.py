@@ -6,6 +6,7 @@ from kombu.exceptions import OperationalError
 from plone import api
 from plone.api.exc import CannotGetPortalError
 from plone.dexterity.interfaces import IDexterityContent
+from Products.CMFCore.utils import getToolByName
 from Products.GenericSetup.tool import UNKNOWN
 from zope.annotation import IAnnotations
 from zope.interface import implementer
@@ -21,16 +22,15 @@ logger = logging.getLogger("collective.elastic.plone")
 class ElasticSearchIndexQueueProcessor:
     """a queue processor for Open-/ElasticSearch"""
 
-    def _active(self):
-        """ Use (not set up of) robot acceptance server with
-        plone.volto:multilingual fails if collective.elastic.plone in
-        CONFIGURE_PACKAGES
-        """
+    def _active(self, obj=None):
         try:
             portal_setup = api.portal.get_tool("portal_setup")
-        except CannotGetPortalError as e:
-            logger.exception(e)
-            return
+        except CannotGetPortalError:
+            """Applying profile "plone.volto:multilingual" during set up
+            of robot server fails on creating/indexing language
+            infrastructure content.
+            """
+            portal_setup = getToolByName(obj, "portal_setup")
 
         return (
             portal_setup.getLastVersionForProfile(
@@ -39,7 +39,7 @@ class ElasticSearchIndexQueueProcessor:
         )
 
     def index(self, obj, attributes=None):
-        if not self._active() or not IDexterityContent.providedBy(obj):
+        if not self._active(obj) or not IDexterityContent.providedBy(obj):
             return
         # get transaction id
         ts = time.time()
@@ -48,7 +48,7 @@ class ElasticSearchIndexQueueProcessor:
         index.delay("/".join(obj.getPhysicalPath()), ts, INDEX_NAME)
 
     def reindex(self, obj, attributes=None, update_metadata=1):
-        if not self._active():
+        if not self._active(obj):
             logger.error(f"Reindexing of {obj} failed.'")
             return
         try:
@@ -60,7 +60,7 @@ class ElasticSearchIndexQueueProcessor:
             )
 
     def unindex(self, obj):
-        if not self._active():
+        if not self._active(obj):
             return
         uid = api.content.get_uuid(obj)
         unindex.delay(uid, INDEX_NAME)
