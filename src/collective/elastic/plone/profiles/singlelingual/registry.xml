@@ -7,7 +7,6 @@
     <value>de</value>
   </record>
   
-  <!-- Set languages to en/de -->
   <record field="available_languages"
           interface="plone.i18n.interfaces.ILanguageSchema"
           name="plone.available_languages"
