@@ -1,6 +1,6 @@
 [project]
 name = "collective.elastic.plone"
-version = "2.0.1"
+version = "2.1.0"
 description = "Plone Search Integration: Addon to index content in Open-/ElasticSearch"
 keywords = ["elasticsearch", "opensearch", "plone", "celery", "search", "indexer"]
 readme = "README.rst"
@@ -19,6 +19,7 @@ classifiers = [
     "Framework :: Plone",
     "Framework :: Plone :: Addon",
     "Framework :: Plone :: 6.0",
+    "Framework :: Plone :: 6.1",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
