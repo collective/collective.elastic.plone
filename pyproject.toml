@@ -31,7 +31,7 @@ classifiers = [
 ]
 dependencies = [
     "plone.restapi",  # pulls in whole Products.CMFPlone too
-    "collective.elastic.ingest>=2.0.0rc9",
+    "collective.elastic.ingest>=2.1.0",
     "jinja2",
     "deepmerge",
 ]
