@@ -1,6 +1,8 @@
 Changelog
 =========
 
+2.1.0 (2024-04-19)
+------------------
 
 - Add profiles for testing monolingual and multilingual. [ksuess]
 - Add @@clear-and-update-index-server-index. [ksuess]
