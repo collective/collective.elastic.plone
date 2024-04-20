@@ -36,12 +36,12 @@
       />
 
   <genericsetup:registerProfile
-      name="singlelingual"
+      name="monolingual"
       title="Testing profile monolingual"
       directory="profiles/monolingual"
       description="Sets language to german"
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler=".setuphandlers.post_install"
+      post_handler="plone.volto.setuphandlers.post_install"
       />
 
   <genericsetup:registerProfile
@@ -50,7 +50,7 @@
       directory="profiles/multilingual"
       description="Makes site multilingual with languages english/german"
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler=".setuphandlers.post_install"
+      post_handler="plone.volto.setuphandlers.post_install_multilingual"
       />
 
   <utility

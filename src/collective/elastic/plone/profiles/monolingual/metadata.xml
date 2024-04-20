@@ -1,7 +1,7 @@
 <metadata>
   <version>1000</version>
   <dependencies>
-    <dependency>profile-collective.elastic.plone:default</dependency>
     <dependency>profile-plone.volto:default</dependency>
+    <dependency>profile-collective.elastic.plone:default</dependency>
   </dependencies>
 </metadata>
