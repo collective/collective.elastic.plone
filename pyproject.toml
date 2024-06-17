@@ -52,6 +52,7 @@ test = [
     "plone.app.contenttypes[test]",
     "pytest-plone",
     "pdbpp",
+    "plone.volto",
 ]
 
 [build-system]
