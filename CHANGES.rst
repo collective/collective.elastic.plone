@@ -4,7 +4,8 @@ Changelog
 2.1.1 (2024-xx-xx)
 ------------------
 
-- Nothing yet
+- Fix REST API anonymous search according 2.x index server field type of 'allowedRolesAndUsers'. [ksuess]
+
 
 2.1.0 (2024-04-19)
 ------------------

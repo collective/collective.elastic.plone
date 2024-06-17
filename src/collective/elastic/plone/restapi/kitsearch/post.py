@@ -80,7 +80,7 @@ class Kitsearch(Service):
                 "must": [
                     {
                         "terms": {
-                            "allowedRolesAndUsers.keyword": arau,
+                            "allowedRolesAndUsers": arau,
                         },
                     }
                 ],
