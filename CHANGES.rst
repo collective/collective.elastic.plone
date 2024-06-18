@@ -4,6 +4,7 @@ Changelog
 2.1.1 (2024-xx-xx)
 ------------------
 
+- Remove Volto testing profiles (monolingual and multilingual). [ksuess]
 - Fix REST API anonymous search according 2.x index server field type of 'allowedRolesAndUsers'. [ksuess]
 
 
