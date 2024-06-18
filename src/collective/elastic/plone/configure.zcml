@@ -35,24 +35,6 @@
       post_handler=".setuphandlers.uninstall"
       />
 
-  <genericsetup:registerProfile
-      name="monolingual"
-      title="Testing profile monolingual"
-      directory="profiles/monolingual"
-      description="Sets language to german"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler="plone.volto.setuphandlers.post_install"
-      />
-
-  <genericsetup:registerProfile
-      name="multilingual"
-      title="Testing profile multilingual en/de"
-      directory="profiles/multilingual"
-      description="Makes site multilingual with languages english/german"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler="plone.volto.setuphandlers.post_install_multilingual"
-      />
-
   <utility
       factory=".setuphandlers.HiddenProfiles"
       name="collective.elastic.plone-hiddenprofiles"

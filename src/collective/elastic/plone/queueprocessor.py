@@ -26,10 +26,6 @@ class ElasticSearchIndexQueueProcessor:
         try:
             portal_setup = api.portal.get_tool("portal_setup")
         except CannotGetPortalError:
-            """Applying profile "plone.volto:multilingual" during set up
-            of robot server fails on creating/indexing language
-            infrastructure content.
-            """
             portal_setup = getToolByName(obj, "portal_setup")
 
         return (
