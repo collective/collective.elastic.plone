@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.1.1 (2024-xx-xx)
+2.1.1 (2024-08-02)
 ------------------
 
 - Remove Volto testing profiles (monolingual and multilingual). [ksuess]
